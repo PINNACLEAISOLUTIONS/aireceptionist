@@ -1,9 +1,9 @@
 /* ===== DESIGN SYSTEM ===== */
 :root {
     /* Colors */
-    --bg-primary: #0a0e1a;
-    --bg-secondary: #0f1629;
-    --bg-card: rgba(15, 22, 41, 0.7);
+    --bg-primary: #100d0a;
+    --bg-secondary: #1a140f;
+    --bg-card: rgba(26, 20, 15, 0.7);
     --bg-glass: rgba(255, 255, 255, 0.03);
     
     --accent-primary: #e8a83c;
@@ -17,7 +17,7 @@
     --text-muted: rgba(255, 255, 255, 0.5);
 
     --gradient-primary: linear-gradient(135deg, #e8a83c 0%, #ff6b4a 50%, #e8a83c 100%);
-    --gradient-dark: linear-gradient(180deg, #0a0e1a 0%, #0f1629 100%);
+    --gradient-dark: linear-gradient(180deg, #100d0a 0%, #1a140f 100%);
     --gradient-gold: linear-gradient(135deg, #e8a83c 0%, #ffcf8a 50%, #e8a83c 100%);
     
     /* Typography */
@@ -186,7 +186,7 @@ ul {
 }
 
 .navbar.scrolled {
-    background: rgba(10, 14, 26, 0.95);
+    background: rgba(16, 13, 10, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 12px 0;
@@ -1365,7 +1365,7 @@ ul {
         left: 0;
         right: 0;
         flex-direction: column;
-        background: rgba(10, 14, 26, 0.98);
+        background: rgba(16, 13, 10, 0.98);
         backdrop-filter: blur(20px);
         padding: 24px;
         gap: 20px;
