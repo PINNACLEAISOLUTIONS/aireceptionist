@@ -171,29 +171,35 @@ function initFormHandler() {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-
-        // ponytail: stub — submission is faked, no leads are actually delivered anywhere.
-        // Wire to a real endpoint (Formspree/n8n webhook/etc.) before relying on this form.
-
-        // Button animation
+        // ponytail: static site, no backend of our own — posts to FormSubmit.co
+        // (no signup/API key needed) which relays the submission to the target
+        // inbox server-side. The AJAX endpoint keeps the visitor on-page instead
+        // of redirecting through FormSubmit's hosted confirmation page.
+        const ajaxUrl = form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
         const button = form.querySelector('button[type="submit"]');
         const originalText = button.innerHTML;
         button.innerHTML = '<span>Sending...</span>';
         button.disabled = true;
 
-        // Simulate form submission (replace with actual endpoint)
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            const response = await fetch(ajaxUrl, {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: new FormData(form)
+            });
+            const result = await response.json();
+            if (!response.ok || result.success === 'false') {
+                throw new Error(result.message || 'Submission failed');
+            }
 
-        // Success state
-        button.innerHTML = '<span>✓ Message Sent!</span>';
-        button.style.background = '#00ff88';
+            button.innerHTML = '<span>✓ Message Sent!</span>';
+            button.style.background = '#00ff88';
+            form.reset();
+        } catch (err) {
+            button.innerHTML = '<span>Error — Please Try Again</span>';
+            button.style.background = '#ff4d4d';
+        }
 
-        // Reset form
-        form.reset();
-
-        // Reset button after delay
         setTimeout(() => {
             button.innerHTML = originalText;
             button.disabled = false;

@@ -71,11 +71,36 @@
             <div class="hero-gradient"></div>
             <canvas class="particles-bg" data-color="232, 168, 60"></canvas>
             <div class="floating-elements">
-                <div class="float-icon float-1">📞</div>
-                <div class="float-icon float-2">📅</div>
-                <div class="float-icon float-3">💬</div>
-                <div class="float-icon float-4">⏰</div>
-                <div class="float-icon float-5">🎧</div>
+                <div class="float-icon float-1">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </div>
+                <div class="float-icon float-2">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                </div>
+                <div class="float-icon float-3">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <div class="float-icon float-4">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                </div>
+                <div class="float-icon float-5">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                    </svg>
+                </div>
             </div>
         </div>
         <div class="container hero-content">
@@ -113,8 +138,8 @@
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat">
-                    <span class="stat-number" data-count="0">0</span>
-                    <span class="stat-label">Training Needed</span>
+                    <span class="stat-number" data-count="5">0</span><span class="stat-suffix">-Min</span>
+                    <span class="stat-label">Setup Time</span>
                 </div>
             </div>
         </div>
@@ -347,32 +372,64 @@
             </div>
             <div class="industries-grid">
                 <div class="industry-card">
-                    <div class="industry-icon">🔧</div>
+                    <div class="industry-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
                     <h3>Service Businesses</h3>
                     <p>Plumbers, electricians, HVAC, and repair services</p>
                 </div>
                 <div class="industry-card">
-                    <div class="industry-icon">🏢</div>
+                    <div class="industry-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h18"/>
+                            <path d="M5 21V7l7-4 7 4v14"/>
+                            <path d="M9 21v-6h6v6"/>
+                        </svg>
+                    </div>
                     <h3>Professional Offices</h3>
                     <p>Law firms, accounting, real estate, and consulting</p>
                 </div>
                 <div class="industry-card">
-                    <div class="industry-icon">🔨</div>
+                    <div class="industry-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/>
+                            <path d="M17.64 15 22 10.64"/>
+                            <path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>
+                        </svg>
+                    </div>
                     <h3>Contractors</h3>
                     <p>Construction, renovation, and home improvement</p>
                 </div>
                 <div class="industry-card">
-                    <div class="industry-icon">🏥</div>
+                    <div class="industry-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="6" x2="12" y2="18"/>
+                            <line x1="6" y1="12" x2="18" y2="12"/>
+                        </svg>
+                    </div>
                     <h3>Medical & Dental</h3>
                     <p>Clinics, dental offices, and healthcare practices</p>
                 </div>
                 <div class="industry-card">
-                    <div class="industry-icon">🏪</div>
+                    <div class="industry-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l1-6h16l1 6"/>
+                            <path d="M3 9a2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0 2 2 0 0 0 4 0"/>
+                            <path d="M4 9v10a1 1 0 0 0 1 1h4v-6h6v6h4a1 1 0 0 0 1-1V9"/>
+                        </svg>
+                    </div>
                     <h3>Local Businesses</h3>
                     <p>Retail stores, restaurants, and local services</p>
                 </div>
                 <div class="industry-card">
-                    <div class="industry-icon">💼</div>
+                    <div class="industry-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
                     <h3>Small Businesses</h3>
                     <p>Any company that needs professional phone coverage</p>
                 </div>
@@ -410,17 +467,24 @@
                     </div>
                 </div>
                 <div class="cta-form-container">
-                    <form class="cta-form" id="contactForm">
+                    <form class="cta-form" id="contactForm" action="https://formsubmit.co/pinnacleaiagent@agentsales.com" method="POST">
+                        <input type="hidden" name="_subject" value="New AI Receptionist Demo Request">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
                         <div class="form-group">
+                            <svg class="form-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                             <input type="text" id="name" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
+                            <svg class="form-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
                             <input type="email" id="email" name="email" placeholder="Email Address" required>
                         </div>
                         <div class="form-group">
+                            <svg class="form-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             <input type="tel" id="phone" name="phone" placeholder="Phone Number">
                         </div>
                         <div class="form-group">
+                            <svg class="form-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                             <input type="text" id="business" name="business" placeholder="Business Name">
                         </div>
                         <button type="submit" class="btn btn-primary btn-full">

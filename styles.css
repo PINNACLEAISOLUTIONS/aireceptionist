@@ -352,8 +352,18 @@ ul {
 
 .float-icon {
     position: absolute;
-    font-size: 2rem;
-    opacity: 0.6;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-glass);
+    border: 1px solid rgba(232, 168, 60, 0.25);
+    border-radius: 50%;
+    color: var(--accent-primary);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 24px rgba(232, 168, 60, 0.15);
+    opacity: 0.85;
     animation: float 6s ease-in-out infinite;
 }
 
@@ -1128,9 +1138,31 @@ ul {
 }
 
 .industry-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+    --card-accent: 232, 168, 60;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--card-accent), 0.14);
+    border: 1px solid rgba(var(--card-accent), 0.25);
+    border-radius: 16px;
+    color: rgb(var(--card-accent));
+    transition: transform var(--transition-medium), background var(--transition-medium);
+}
+
+.industry-card:nth-child(3n+2) .industry-icon {
+    --card-accent: 255, 107, 74;
+}
+
+.industry-card:nth-child(3n+3) .industry-icon {
+    --card-accent: 255, 207, 138;
+}
+
+.industry-card:hover .industry-icon {
+    transform: scale(1.08) rotate(-4deg);
+    background: rgba(var(--card-accent), 0.22);
 }
 
 .industry-card h3 {
@@ -1215,9 +1247,27 @@ ul {
     gap: 16px;
 }
 
+.form-group {
+    position: relative;
+}
+
+.form-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color var(--transition-fast);
+}
+
+.form-group:focus-within .form-icon {
+    color: var(--accent-primary);
+}
+
 .form-group input {
     width: 100%;
-    padding: 16px 20px;
+    padding: 16px 20px 16px 50px;
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-sm);
@@ -1432,6 +1482,10 @@ ul {
     }
     
     .scroll-indicator {
+        display: none;
+    }
+
+    .floating-elements {
         display: none;
     }
 }
