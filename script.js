@@ -1,5 +1,7 @@
 // ===== PINNACLE AI RECEPTIONIST - JAVASCRIPT =====
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all modules
     initNavbar();
@@ -8,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatCounters();
     initSmoothScroll();
     initFormHandler();
+    if (!prefersReducedMotion) {
+        initCardTilt();
+        initParticleFields();
+    }
 });
 
 // ===== NAVBAR =====
@@ -168,6 +174,9 @@ function initFormHandler() {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
+        // ponytail: stub — submission is faked, no leads are actually delivered anywhere.
+        // Wire to a real endpoint (Formspree/n8n webhook/etc.) before relying on this form.
+
         // Button animation
         const button = form.querySelector('button[type="submit"]');
         const originalText = button.innerHTML;
@@ -212,7 +221,28 @@ function initParallax() {
 }
 
 // Initialize parallax after load
-window.addEventListener('load', initParallax);
+if (!prefersReducedMotion) window.addEventListener('load', initParallax);
+
+// ===== CARD TILT (spotlight/parallax tilt on feature, industry & visual cards) =====
+function initCardTilt() {
+    const cards = document.querySelectorAll('.feature-card, .industry-card, .visual-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width;
+            const py = (e.clientY - rect.top) / rect.height;
+            const rotateX = (0.5 - py) * 10;
+            const rotateY = (px - 0.5) * 10;
+
+            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
 
 // ===== VISUAL STATS ANIMATION =====
 function initVisualStats() {
@@ -267,6 +297,78 @@ function typeWriter(element, text, speed = 50) {
     }
 
     type();
+}
+
+// ===== PARTICLE FIELD BACKGROUNDS (per-section, canvas, no library) =====
+function initParticleFields() {
+    document.querySelectorAll('canvas.particles-bg').forEach(canvas => {
+        setupParticleField(canvas, canvas.dataset.color || '232, 168, 60');
+    });
+}
+
+function setupParticleField(canvas, color) {
+    const ctx = canvas.getContext('2d');
+    let width, height, particles, running = false, raf;
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+        const count = Math.max(16, Math.min(60, Math.floor((width * height) / 28000)));
+        particles = Array.from({ length: count }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: (Math.random() - 0.5) * 0.25,
+            r: Math.random() * 1.4 + 0.6
+        }));
+    }
+
+    function tick() {
+        if (!running) { raf = null; return; }
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x <= 0 || p.x >= width) p.vx *= -1;
+            if (p.y <= 0 || p.y >= height) p.vy *= -1;
+        });
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const a = particles[i], b = particles[j];
+                const dist = Math.hypot(a.x - b.x, a.y - b.y);
+                if (dist < 130) {
+                    ctx.strokeStyle = `rgba(${color}, ${0.15 * (1 - dist / 130)})`;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        particles.forEach(p => {
+            ctx.fillStyle = `rgba(${color}, 0.6)`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        raf = requestAnimationFrame(tick);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Only animate while the section is actually visible (perf: 6 canvases on one page)
+    new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            running = entry.isIntersecting;
+            if (running && !raf) tick();
+        });
+    }, { threshold: 0 }).observe(canvas);
 }
 
 // ===== Add class to body when page is loaded =====
