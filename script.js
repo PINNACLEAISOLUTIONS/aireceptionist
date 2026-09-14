@@ -45,6 +45,7 @@ function initMobileMenu() {
     toggle.addEventListener('click', () => {
         toggle.classList.toggle('active');
         navLinks.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', navLinks.classList.contains('active'));
     });
 
     // Close menu when clicking a link
@@ -52,6 +53,7 @@ function initMobileMenu() {
         link.addEventListener('click', () => {
             toggle.classList.remove('active');
             navLinks.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
         });
     });
 }

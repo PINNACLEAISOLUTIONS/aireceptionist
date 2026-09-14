@@ -281,11 +281,15 @@ ul {
 .mobile-toggle {
     display: none;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 5px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 5px;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .mobile-toggle span {
@@ -942,7 +946,7 @@ ul {
     color: #ff6b6b;
 }
 
-.benefit-text h4 {
+.benefit-text h3 {
     font-family: var(--font-display);
     font-size: 1.1rem;
     font-weight: 600;
@@ -1317,7 +1321,7 @@ ul {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
 }
 
@@ -1347,7 +1351,7 @@ ul {
 
 .footer-bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding-top: 40px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
