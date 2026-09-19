@@ -1,3 +1,23 @@
+
+function initCardTilt() {
+    const cards = document.querySelectorAll('.bento-card, .pricing-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -4;
+            const rotateY = ((x - centerX) / centerX) * 4;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
 // ===== PINNACLE AI RECEPTIONIST - JAVASCRIPT =====
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -9,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initStatCounters();
     initSmoothScroll();
-    initFormHandler();
+    // initFormHandler consolidated into initContactForm
     if (!prefersReducedMotion) {
         initCardTilt();
         initParticleFields();
@@ -177,109 +197,7 @@ function initSmoothScroll() {
 }
 
 // ===== FORM HANDLER =====
-function initFormHandler() {
-    const form = document.getElementById('contactForm');
-
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // ponytail: static site, no backend of our own — posts to FormSubmit.co
-        // (no signup/API key needed) which relays the submission to the target
-        // inbox server-side. The AJAX endpoint keeps the visitor on-page instead
-        // of redirecting through FormSubmit's hosted confirmation page.
-        const ajaxUrl = form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
-        const button = form.querySelector('button[type="submit"]');
-        const originalText = button.innerHTML;
-        button.innerHTML = '<span>Sending...</span>';
-        button.disabled = true;
-
-        try {
-            const response = await fetch(ajaxUrl, {
-                method: 'POST',
-                headers: { Accept: 'application/json' },
-                body: new FormData(form)
-            });
-            const result = await response.json();
-            if (!response.ok || result.success === 'false') {
-                throw new Error(result.message || 'Submission failed');
-            }
-
-            button.innerHTML = '<span>✓ Message Sent!</span>';
-            button.style.background = '#00ff88';
-            form.reset();
-        } catch (err) {
-            button.innerHTML = '<span>Error — Please Try Again</span>';
-            button.style.background = '#ff4d4d';
-        }
-
-        setTimeout(() => {
-            button.innerHTML = originalText;
-            button.disabled = false;
-            button.style.background = '';
-        }, 3000);
-    });
-}
-
-// ===== PARALLAX EFFECT =====
-function initParallax() {
-    const floatingElements = document.querySelectorAll('.float-icon');
-
-    window.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX / window.innerWidth - 0.5;
-        const mouseY = e.clientY / window.innerHeight - 0.5;
-
-        floatingElements.forEach((element, index) => {
-            const speed = (index + 1) * 10;
-            const x = mouseX * speed;
-            const y = mouseY * speed;
-
-            element.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    });
-}
-
-// Initialize parallax after load
-if (!prefersReducedMotion) window.addEventListener('load', initParallax);
-
-// ===== CARD TILT (spotlight/parallax tilt on feature, industry & visual cards) =====
-function initCardTilt() {
-    const cards = document.querySelectorAll('.feature-card, .industry-card, .visual-card');
-
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const px = (e.clientX - rect.left) / rect.width;
-            const py = (e.clientY - rect.top) / rect.height;
-            const rotateX = (0.5 - py) * 10;
-            const rotateY = (px - 0.5) * 10;
-
-            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-}
-
-// ===== VISUAL STATS ANIMATION =====
-function initVisualStats() {
-    const visualStats = document.querySelectorAll('.visual-value');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateVisualStat(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    visualStats.forEach(stat => observer.observe(stat));
-}
-
+// initFormHandler removed to avoid duplicate listeners
 function animateVisualStat(element) {
     const target = parseInt(element.textContent);
     const duration = 1500;
@@ -301,7 +219,7 @@ function animateVisualStat(element) {
 }
 
 // Initialize visual stats
-document.addEventListener('DOMContentLoaded', initVisualStats);
+// initVisualStats removed
 
 // ===== TYPING EFFECT (Optional Enhancement) =====
 function typeWriter(element, text, speed = 50) {
@@ -406,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPricingToggle();
     initFaqAccordion();
     initContactForm();
+    initModalHandlers();
     initScrollRevealObserver();
 });
 
@@ -708,40 +627,46 @@ function initContactForm() {
 
         const originalBtnHtml = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Transmitting Deployment Request... ⏳</span>';
+        submitBtn.innerHTML = '<span>Transmitting Demo Request... ⏳</span>';
 
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
 
         try {
             const response = await fetch('https://formsubmit.co/ajax/futureai4all@gmail.com', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: formData
             });
 
-            if (response.ok) {
+            const result = await response.json();
+            if (response.ok && result.success !== 'false') {
                 if (statusDiv) {
                     statusDiv.style.display = 'block';
-                    statusDiv.style.background = 'rgba(0, 217, 146, 0.12)';
-                    statusDiv.style.border = '1px solid rgba(0, 217, 146, 0.5)';
-                    statusDiv.style.color = '#00D992';
-                    statusDiv.innerHTML = '<strong>⚡ Deployment Request Received!</strong><br>Check your inbox at <em>' + (data.email || 'your email') + '</em>. Our engineering team will calibrate your line in under 10 minutes.';
+                    statusDiv.style.background = 'rgba(16, 185, 129, 0.15)';
+                    statusDiv.style.border = '1px solid rgba(16, 185, 129, 0.6)';
+                    statusDiv.style.color = '#10B981';
+                    statusDiv.style.padding = '16px';
+                    statusDiv.style.borderRadius = '10px';
+                    statusDiv.style.marginTop = '16px';
+                    statusDiv.style.textAlign = 'center';
+                    statusDiv.innerHTML = '<strong>⚡ Message Sent!</strong><br>Confirmation has popped up on your screen. Check your inbox or call us at <strong>(904) 686-6593</strong>.';
                 }
                 form.reset();
-                submitBtn.innerHTML = '<span>Request Dispatched Successfully ✅</span>';
+                submitBtn.innerHTML = '<span>Message Sent Successfully ✅</span>';
+                submitBtn.disabled = false;
+                showFormSuccessModal();
             } else {
+                console.log('FormSubmit AJAX fallback, submitting natively...');
                 form.submit();
             }
         } catch (err) {
+            console.error('FormSubmit AJAX error, submitting natively:', err);
             form.submit();
         }
     });
 }
-
 
 // 7. SCROLL REVEAL ANIMATIONS MODULE
 function initScrollRevealObserver() {
@@ -772,5 +697,57 @@ function initScrollRevealObserver() {
         elements.forEach(el => obs.observe(el));
     } else {
         elements.forEach(el => el.classList.add('is-revealed'));
+    }
+}
+
+
+// ===== CONFIRMATION POPUP MODAL LOGIC =====
+function showFormSuccessModal() {
+    const modal = document.getElementById('formSuccessModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+}
+
+function hideFormSuccessModal() {
+    const modal = document.getElementById('formSuccessModal');
+    if (!modal) return;
+    modal.classList.remove('active');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+    // Clean URL query param
+    if (window.history.replaceState) {
+        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({ path: cleanUrl }, '', cleanUrl);
+    }
+}
+
+function initModalHandlers() {
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const xBtn = document.getElementById('modalXClose');
+    const modal = document.getElementById('formSuccessModal');
+
+    if (closeBtn) closeBtn.addEventListener('click', hideFormSuccessModal);
+    if (xBtn) xBtn.addEventListener('click', hideFormSuccessModal);
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) hideFormSuccessModal();
+        });
+    }
+
+    // Check if user returned from FormSubmit redirect with ?submitted=true
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('submitted') === 'true') {
+        showFormSuccessModal();
+    }
+    
+    // Dynamic _next field setting based on current URL
+    const nextInput = document.getElementById('formSubmitNext');
+    if (nextInput) {
+        const currentBase = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        nextInput.value = currentBase + (currentBase.endsWith('/') ? '' : '/') + '?submitted=true';
     }
 }
