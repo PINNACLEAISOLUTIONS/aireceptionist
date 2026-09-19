@@ -1,142 +1,136 @@
----
-version: 1.0.0
-name: pinnacle-ai-receptionist-design-system
-description: Design system specification for Pinnacle AI Receptionist, synthesized from VoltAgent awesome-design-md patterns (Linear, ElevenLabs, Google Material 3, and Stripe). Built on a focused dark canvas (#121316), elevated obsidian slate card panels (#1E222D), an atmospheric centered AI receptionist hero visual, and a functional Google quad-color accent system.
+﻿---
+version: 2.0.0
+name: pinnacle-ai-receptionist-voltron-mtp
+description: Design system and conversion architecture for Pinnacle AI Receptionist, synthesized from the Voltron MTP Professional Website Framework (VoltAgent-inspired developer-grade design). Built on an unrelenting near-black canvas (#0B0C0E), elevated obsidian panels (#14161C, #1A1D25), electric emerald conversion accents (#00D992), technical cyan and amber telemetry indicators, SF Mono/JetBrains Mono data chips, and hairline borders.
 
 colors:
-  # Canvas & Base Surfaces
-  canvas: "#121316"
-  canvas-subtle: "#191B22"
-  surface-card: "#1E222D"
-  surface-card-hover: "#262B38"
-  surface-glass: "rgba(255, 255, 255, 0.05)"
-  
+  # Base Canvas & Obsidian Surfaces
+  canvas: "#0B0C0E"
+  canvas-soft: "#14161C"
+  surface-card: "#1A1D25"
+  surface-card-hover: "#222631"
+  surface-glass: "rgba(255, 255, 255, 0.04)"
+  surface-subtle: "rgba(255, 255, 255, 0.02)"
+
   # Hairline Borders & Shadows
-  hairline: "rgba(255, 255, 255, 0.14)"
-  hairline-strong: "rgba(255, 255, 255, 0.28)"
-  shadow-card: "0 4px 20px rgba(0, 0, 0, 0.35)"
-  shadow-card-hover: "0 16px 36px rgba(0, 0, 0, 0.5)"
+  hairline: "rgba(255, 255, 255, 0.09)"
+  hairline-strong: "rgba(255, 255, 255, 0.18)"
+  hairline-primary: "rgba(0, 217, 146, 0.35)"
+  hairline-dashed: "1px dashed rgba(255, 255, 255, 0.12)"
+  shadow-card: "0 6px 24px rgba(0, 0, 0, 0.45)"
+  shadow-card-hover: "0 14px 40px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 217, 146, 0.12)"
 
-  # Google Functional Color Accents
-  google-blue: "#1A73E8"
-  google-blue-hover: "#1557B0"
-  google-blue-light: "#4285F4"
-  google-blue-tint: "rgba(66, 133, 244, 0.14)"
-  google-green: "#34A853"
-  google-green-light: "#81C995"
-  google-green-tint: "rgba(52, 168, 83, 0.14)"
-  google-yellow: "#FBBC05"
-  google-yellow-light: "#FDD663"
-  google-yellow-tint: "rgba(251, 188, 5, 0.14)"
-  google-red: "#EA4335"
-  google-red-light: "#F28B82"
-  google-red-tint: "rgba(234, 67, 53, 0.14)"
+  # Voltron Electric Brand Accents
+  primary: "#00D992"         # Electric Emerald Green
+  primary-soft: "#2FD6A1"    # Soft mint green
+  primary-deep: "#10B981"    # Deep emerald
+  primary-glow: "rgba(0, 217, 146, 0.25)"
+  on-primary: "#0B0C0E"      # Contrast ink on primary
 
-  # Typography Colors
+  # High-Contrast Telemetry Accents
+  telemetry-cyan: "#00E5FF"  # Latency, real-time voice synthesis
+  telemetry-cyan-glow: "rgba(0, 229, 255, 0.2)"
+  telemetry-amber: "#FFB800" # ROI metrics, revenue protection
+  telemetry-rose: "#FF4D6D"  # Spam filtering, emergency warm transfers
+
+  # Clean Typographic Scale
   text-primary: "#FFFFFF"
-  text-secondary: "#BDC1C6"
-  text-muted: "#80868B"
+  text-secondary: "#C2C7D0"
+  text-muted: "#848A98"
+  text-mono: "#9AE6B4"
 
 typography:
-  font-primary: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-  font-display: "'Outfit', 'Inter', -apple-system, sans-serif"
+  font-primary: "'Inter', system-ui, -apple-system, sans-serif"
+  font-display: "'Outfit', 'Inter', system-ui, sans-serif"
+  font-mono: "'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace"
+
   display-hero:
     fontFamily: "'Outfit', sans-serif"
-    fontSize: "clamp(2.4rem, 6.2vw, 4.6rem)"
+    fontSize: "clamp(2.5rem, 6.4vw, 4.75rem)"
     fontWeight: 800
-    lineHeight: 1.08
+    lineHeight: 1.06
     letterSpacing: "-0.035em"
   h2-section:
     fontFamily: "'Outfit', sans-serif"
-    fontSize: "clamp(2rem, 4vw, 2.75rem)"
+    fontSize: "clamp(2rem, 4.2vw, 2.85rem)"
     fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "-0.02em"
+    lineHeight: 1.18
+    letterSpacing: "-0.025em"
   h3-card:
     fontFamily: "'Inter', sans-serif"
     fontSize: "1.25rem"
     fontWeight: 600
-    lineHeight: 1.4
-  body:
-    fontFamily: "'Inter', sans-serif"
-    fontSize: "1rem"
-    lineHeight: 1.6
-    color: "#BDC1C6"
+    lineHeight: 1.35
+  mono-telemetry:
+    fontFamily: "'JetBrains Mono', monospace"
+    fontSize: "0.8rem"
+    fontWeight: 600
+    letterSpacing: "0.08em"
+    textTransform: "uppercase"
 
 rounded:
   none: 0px
+  xs: 4px
   sm: 6px
   btn: 8px
-  card: 18px
-  card-lg: 24px
+  card: 14px
+  card-lg: 20px
   pill: 9999px
 
 components:
-  # Primary Button (Google Blue Material Standard)
+  # Primary Conversion Button (Voltron Electric Green)
   button-primary:
-    background: "#1A73E8"
-    color: "#FFFFFF"
-    fontWeight: 500
-    borderRadius: "8px"
-    padding: "13px 26px"
-    border: "1px solid #1A73E8"
-    boxShadow: "0 1px 3px rgba(26, 115, 232, 0.3), 0 4px 12px rgba(26, 115, 232, 0.25)"
-    hover:
-      background: "#1557B0"
-      transform: "translateY(-2px)"
-      boxShadow: "0 4px 16px rgba(26, 115, 232, 0.45)"
-
-  # Secondary Button (Glass Surface)
-  button-secondary:
-    background: "rgba(255, 255, 255, 0.08)"
-    color: "#FFFFFF"
-    fontWeight: 500
-    borderRadius: "8px"
-    padding: "13px 26px"
-    border: "1px solid rgba(255, 255, 255, 0.18)"
-    hover:
-      background: "rgba(255, 255, 255, 0.14)"
-      transform: "translateY(-2px)"
-
-  # Status Pill (Active Service Indicator)
-  status-pill:
-    background: "rgba(15, 23, 42, 0.85)"
-    border: "1px solid rgba(255, 255, 255, 0.14)"
-    borderRadius: "9999px"
-    padding: "7px 18px"
-    textTransform: "uppercase"
-    fontSize: "0.8rem"
+    background: "#00D992"
+    color: "#0B0C0E"
     fontWeight: 600
-    dotColor: "#34A853"
-    dotAnimation: "statusPulse 2s ease-in-out infinite"
+    borderRadius: "8px"
+    padding: "13px 26px"
+    border: "1px solid #00D992"
+    boxShadow: "0 2px 10px rgba(0, 217, 146, 0.35), 0 0 20px rgba(0, 217, 146, 0.2)"
+    hover:
+      background: "#2FD6A1"
+      transform: "translateY(-2px)"
+      boxShadow: "0 6px 20px rgba(0, 217, 146, 0.5), 0 0 30px rgba(0, 217, 146, 0.3)"
 
-  # Bento Feature Cards (Google Quad-Color Identity)
-  cards:
-    surface: "#1E222D"
-    border: "1px solid rgba(255, 255, 255, 0.14)"
-    borderRadius: "18px"
-    padding: "32px"
-    accents:
-      latency-voice:
-        color: "#4285F4" # Google Blue
-        borderTop: "3px solid #4285F4"
-        animation: "pulse-float"
-      calendar-booking:
-        color: "#34A853" # Google Green
-        borderTop: "3px solid #34A853"
-        animation: "card-lift"
-      knowledge-scraping:
-        color: "#FBBC05" # Google Yellow
-        borderTop: "3px solid #FBBC05"
-        animation: "warm-shimmer"
-      emergency-transfer:
-        color: "#EA4335" # Google Red
-        borderTop: "3px solid #EA4335"
-        animation: "alert-pulse"
+  # Secondary Outline Button (Hairline Dark)
+  button-secondary:
+    background: "rgba(255, 255, 255, 0.03)"
+    color: "#FFFFFF"
+    fontWeight: 500
+    borderRadius: "8px"
+    padding: "13px 26px"
+    border: "1px solid rgba(255, 255, 255, 0.12)"
+    hover:
+      background: "rgba(255, 255, 255, 0.08)"
+      borderColor: "rgba(255, 255, 255, 0.25)"
+      transform: "translateY(-2px)"
 
-rules:
-  - "Never create invisible boxes: All cards must use elevated surface #1E222D with visible hairline borders against the #121316 background."
-  - "Hero visual prominence: The centered AI receptionist image (assets/ai_robot_hero.jpg) must be clearly visible through a calibrated translucent scrim."
-  - "No robotic AI palettes: Restrict chromatic moments to Google functional colors (Blue for action, Green for active/calendar, Yellow for revenue/speed, Red for emergency)."
-  - "Mobile-first readability: Maintain zero horizontal overflow (overflow-x: clip) with stacked touch targets on viewports under 480px."
+  # Telemetry Live Eyebrow
+  eyebrow-pill:
+    background: "rgba(0, 217, 146, 0.08)"
+    border: "1px solid rgba(0, 217, 146, 0.25)"
+    borderRadius: "9999px"
+    padding: "6px 16px"
+    fontFamily: "'JetBrains Mono', monospace"
+    fontSize: "0.78rem"
+    fontWeight: 600
+    color: "#00D992"
+    beaconDot: "#00D992"
+    beaconPulse: "radarPing 2s infinite"
+
+  # Bento Feature Cards
+  bento-card:
+    surface: "#1A1D25"
+    border: "1px solid rgba(255, 255, 255, 0.09)"
+    borderRadius: "14px"
+    padding: "30px"
+    hover:
+      borderColor: "rgba(0, 217, 146, 0.4)"
+      boxShadow: "0 12px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 217, 146, 0.1)"
+
+conversion_rules:
+  - "Frictionless Hero CTA: Never hide primary action; offer instant Live Demo trigger alongside microcopy risk reducers (zero hardware, keep number, 2-min setup)."
+  - "Live Proof Before Pitch: Place interactive audio studio and real call scenario simulator above standard marketing prose."
+  - "Concrete Telemetry Over Fluff: Explicitly state latency (<140ms), uptime (99.98%), and average saved payroll (,500/mo) in high-contrast monospace chips."
+  - "Continuous Dark Canvas: Ground all modules on deep #0B0C0E background broken only by hairline outlines and electric green conversion anchors."
 ---
