@@ -58,45 +58,57 @@ function initMobileMenu() {
     });
 }
 
-// ===== SCROLL ANIMATIONS =====
+// ===== SCROLL ANIMATIONS ("WINDOWS BOXES" & CARDS) =====
 function initScrollAnimations() {
-    // Elements to animate
-    const animateElements = [
-        '.feature-card',
+    const boxSelectors = [
+        '.bento-card',
+        '.voice-studio-card',
+        '.sim-controls-panel',
+        '.phone-device',
+        '.roi-box',
         '.step',
         '.industry-card',
         '.benefits-content',
-        '.benefits-visual'
+        '.benefits-visual',
+        '.benefit-item',
+        '.pricing-card',
+        '.faq-item',
+        '.cta-form-container'
     ];
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Add staggered delay for grid items
-                const element = entry.target;
-                const siblings = document.querySelectorAll(element.tagName.toLowerCase() + '.' + element.classList[0]);
-                const siblingIndex = Array.from(siblings).indexOf(element);
-
-                setTimeout(() => {
-                    element.classList.add('visible');
-                }, siblingIndex * 100);
-
-                observer.unobserve(element);
-            }
-        });
-    }, observerOptions);
-
-    animateElements.forEach(selector => {
-        document.querySelectorAll(selector).forEach(element => {
-            observer.observe(element);
+    const elementsToObserve = [];
+    boxSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.classList.add('scroll-reveal-box');
+            elementsToObserve.push(el);
         });
     });
+
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -40px 0px',
+            threshold: 0.08
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    el.classList.add('is-revealed');
+                    el.classList.add('visible');
+                    observer.unobserve(el);
+                }
+            });
+        }, observerOptions);
+
+        elementsToObserve.forEach(el => observer.observe(el));
+    } else {
+        elementsToObserve.forEach(el => {
+            el.classList.add('is-revealed');
+            el.classList.add('visible');
+        });
+    }
 }
 
 // ===== STAT COUNTERS =====
