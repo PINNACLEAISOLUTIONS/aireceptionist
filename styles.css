@@ -407,7 +407,7 @@ button {
 .hero-container {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
-    gap: 52px;
+    gap: 48px;
     align-items: center;
     position: relative;
     z-index: 2;
@@ -2001,9 +2001,13 @@ button {
 /* ===== RESPONSIVE DISCIPLINE ===== */
 @media (max-width: 1024px) {
     .hero-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
     .hero-subtitle {
         margin: 0 auto 30px;
     }
@@ -2244,7 +2248,7 @@ button {
 /* Enlarged Hero Image Showcase without Overlays */
 .hero-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.15fr 0.85fr;
     gap: 48px;
     align-items: center;
     position: relative;
@@ -2280,4 +2284,271 @@ button {
 
 .showcase-frame:hover .showcase-img {
     transform: scale(1.03);
+}
+
+
+/* Enlarged Showcase Frame with Radiant Outside Glow */
+.showcase-frame {
+    position: relative;
+    border-radius: 28px;
+    background: var(--color-surface-card);
+    border: 1.5px solid rgba(0, 217, 146, 0.4);
+    padding: 12px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85),
+                0 0 55px rgba(0, 217, 146, 0.28),
+                0 0 100px rgba(0, 229, 255, 0.16);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.showcase-frame:hover {
+    transform: translateY(-5px) scale(1.01);
+    border-color: rgba(0, 217, 146, 0.65);
+    box-shadow: 0 28px 75px rgba(0, 0, 0, 0.9),
+                0 0 70px rgba(0, 217, 146, 0.38),
+                0 0 120px rgba(0, 229, 255, 0.24);
+}
+
+.showcase-img-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000000;
+}
+
+.showcase-img {
+    width: 100%;
+    height: auto;
+    min-height: 520px;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.02);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.showcase-frame:hover .showcase-img {
+    transform: scale(1.04);
+}
+
+/* Glowing Box for NEVER SLEEPS */
+.never-sleeps-box {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 26px 8px;
+    background: rgba(11, 12, 14, 0.7);
+    border: 1.5px solid rgba(0, 217, 146, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 0 35px rgba(0, 217, 146, 0.28), 0 0 60px rgba(0, 229, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    margin-top: 8px;
+}
+
+
+/* Top Hero Title Solid Line */
+.hero-title-top {
+    display: block;
+    white-space: nowrap;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+}
+
+.hero-sub-highlight {
+    display: inline-block;
+    font-weight: 700;
+}
+
+/* Base Global Mobile Fix */
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    position: relative;
+}
+
+/* ===== ENHANCED RESPONSIVE CTA & FORM FIT ===== */
+@media (min-width: 993px) {
+    .hero-title {
+        font-size: clamp(2.2rem, 3.2vw, 3.25rem) !important;
+        line-height: 1.14;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+    .hero-title-top {
+        white-space: normal;
+    }
+    .hero-title {
+        font-size: clamp(2.2rem, 5.5vw, 3rem) !important;
+    }
+    .cta-wrapper {
+        grid-template-columns: 1fr !important;
+        padding: 38px 26px !important;
+        gap: 32px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .hero {
+        overflow: hidden !important;
+        padding: 100px 0 60px !important;
+    }
+    
+    .hero-container {
+        padding: 0 16px !important;
+        gap: 32px !important;
+    }
+
+    .hero-title {
+        font-size: clamp(1.75rem, 7.2vw, 2.35rem) !important;
+        line-height: 1.16 !important;
+        letter-spacing: -0.02em !important;
+    }
+
+    .hero-title-top {
+        white-space: normal !important;
+        display: block !important;
+    }
+
+    .never-sleeps-box {
+        padding: 5px 16px 7px !important;
+        margin-top: 6px !important;
+        border-radius: 12px !important;
+    }
+
+    .never-sleeps-box .voltron-text-gradient {
+        font-size: 0.9em !important;
+    }
+
+    .showcase-frame {
+        padding: 8px !important;
+        border-radius: 18px !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(0, 217, 146, 0.2) !important;
+    }
+
+    .showcase-img {
+        min-height: auto !important;
+        max-height: 380px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* Final CTA Intake Box On Mobile - Perfectly Sized */
+    .cta-section {
+        padding: 48px 0 !important;
+        overflow: hidden !important;
+    }
+
+    .cta-wrapper {
+        grid-template-columns: 1fr !important;
+        padding: 26px 16px !important;
+        gap: 26px !important;
+        border-radius: 20px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 217, 146, 0.1) !important;
+    }
+
+    .cta-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .cta-content h2 {
+        font-size: 1.55rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 14px !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+
+    .cta-content p {
+        font-size: 0.98rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 20px !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        color: var(--text-secondary) !important;
+    }
+
+    .cta-features {
+        gap: 12px !important;
+        margin-bottom: 6px !important;
+    }
+
+    .cta-feature {
+        font-size: 0.92rem !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+
+    .cta-feature span {
+        word-break: break-word !important;
+        line-height: 1.4 !important;
+    }
+
+    .cta-form-container {
+        padding: 20px 14px !important;
+        border-radius: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        background: #0B0C0E !important;
+    }
+
+    .form-group {
+        margin-bottom: 14px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .form-group label {
+        font-size: 0.84rem !important;
+        margin-bottom: 5px !important;
+    }
+
+    .form-input, .form-select {
+        font-size: 16px !important; /* Prevents auto-zoom on iOS */
+        padding: 12px 14px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 10px !important;
+    }
+
+    .btn-large {
+        padding: 15px 20px !important;
+        font-size: 1.02rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-wrapper {
+        padding: 20px 12px !important;
+        gap: 20px !important;
+        border-radius: 16px !important;
+    }
+
+    .cta-content h2 {
+        font-size: 1.4rem !important;
+    }
+
+    .cta-content p {
+        font-size: 0.92rem !important;
+    }
+
+    .cta-form-container {
+        padding: 16px 10px !important;
+    }
 }

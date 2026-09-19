@@ -405,6 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initRoiCalculator();
     initPricingToggle();
     initFaqAccordion();
+    initContactForm();
 });
 
 // 1. VOICE STUDIO MODULE
@@ -665,11 +666,11 @@ function initPricingToggle() {
 
         if (isAnnual) {
             if (starterPrice) starterPrice.textContent = '159';
-            if (growthPrice) growthPrice.textContent = '359';
+            if (growthPrice) growthPrice.textContent = '450';
             if (entPrice) entPrice.textContent = '719';
         } else {
             if (starterPrice) starterPrice.textContent = '199';
-            if (growthPrice) growthPrice.textContent = '449';
+            if (growthPrice) growthPrice.textContent = '450';
             if (entPrice) entPrice.textContent = '899';
         }
     });
@@ -688,6 +689,54 @@ function initFaqAccordion() {
                     card.classList.add('open');
                 }
             });
+        }
+    });
+}
+
+
+// 6. CONTACT FORM AJAX SUBMISSION MODULE
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    const statusDiv = document.getElementById('contactFormStatus');
+    if (!form) return;
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        if (!submitBtn) return;
+
+        const originalBtnHtml = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Transmitting Deployment Request... ⏳</span>';
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/futureai4all@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                if (statusDiv) {
+                    statusDiv.style.display = 'block';
+                    statusDiv.style.background = 'rgba(0, 217, 146, 0.12)';
+                    statusDiv.style.border = '1px solid rgba(0, 217, 146, 0.5)';
+                    statusDiv.style.color = '#00D992';
+                    statusDiv.innerHTML = '<strong>⚡ Deployment Request Received!</strong><br>Check your inbox at <em>' + (data.email || 'your email') + '</em>. Our engineering team will calibrate your line in under 10 minutes.';
+                }
+                form.reset();
+                submitBtn.innerHTML = '<span>Request Dispatched Successfully ✅</span>';
+            } else {
+                form.submit();
+            }
+        } catch (err) {
+            form.submit();
         }
     });
 }
