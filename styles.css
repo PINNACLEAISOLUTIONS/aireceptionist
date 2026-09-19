@@ -429,16 +429,16 @@ ul {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 630px;
-    border-radius: 22px;
+    max-width: 690px;
+    border-radius: 24px;
     overflow: hidden;
     background: #141722;
     border: 1px solid rgba(255, 255, 255, 0.16);
     box-shadow: 
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
         0 25px 60px -15px rgba(0, 0, 0, 0.85),
         0 0 0 1px rgba(66, 133, 244, 0.28),
-        0 0 45px rgba(66, 133, 244, 0.2);
+        0 0 50px rgba(66, 133, 244, 0.22);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
 }
 
@@ -509,7 +509,7 @@ ul {
 .showcase-img-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
     background: #0E1015;
 }
@@ -4017,4 +4017,130 @@ ul {
         text-transform: uppercase !important;
         font-weight: 600 !important;
     }
+}
+
+/* ===== PULSING BACKGROUND AURA BEHIND "YOUR RECEPTIONIST NEVER SLEEPS" ===== */
+.hero-title-pulsar {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.pulsar-glow-layer {
+    position: absolute;
+    inset: -35px -50px -35px -40px;
+    pointer-events: none;
+    z-index: 0;
+    overflow: visible;
+}
+
+.pulsar-orb-primary {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    height: 190px;
+    background: radial-gradient(ellipse at center, rgba(66, 133, 244, 0.48) 0%, rgba(37, 99, 235, 0.25) 50%, transparent 75%);
+    filter: blur(48px);
+    border-radius: 50%;
+    animation: pulsarBreathing 4.5s ease-in-out infinite alternate;
+}
+
+.pulsar-orb-secondary {
+    position: absolute;
+    top: 60%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 170px;
+    background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.38) 0%, rgba(59, 130, 246, 0.18) 55%, transparent 75%);
+    filter: blur(52px);
+    border-radius: 50%;
+    animation: pulsarBreathing 6s ease-in-out infinite alternate-reverse;
+}
+
+.pulsar-orb-tertiary {
+    position: absolute;
+    top: 40%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    width: 290px;
+    height: 150px;
+    background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.38) 0%, rgba(52, 168, 83, 0.15) 50%, transparent 75%);
+    filter: blur(44px);
+    border-radius: 50%;
+    animation: pulsarBreathing 5.2s ease-in-out infinite alternate;
+}
+
+.pulsar-ring {
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, transparent 40%, rgba(96, 165, 250, 0.16) 65%, transparent 78%);
+    filter: blur(24px);
+    animation: pulsarRingPulse 3.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulsarBreathing {
+    0% {
+        transform: translate(-50%, -50%) scale(0.85);
+        opacity: 0.55;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.18);
+        opacity: 0.95;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.92);
+        opacity: 0.65;
+    }
+}
+
+@keyframes pulsarRingPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.88);
+        opacity: 0.35;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.22);
+        opacity: 0.85;
+    }
+}
+
+.hero-title-pulsar .hero-title {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0;
+}
+
+/* Minimal Phone HUD on Hero Banner */
+.showcase-hud-phone {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: rgba(15, 23, 42, 0.82);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    z-index: 2;
+}
+
+.showcase-hud-phone svg {
+    color: #60A5FA;
 }
