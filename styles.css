@@ -2299,3 +2299,170 @@ ul {
         margin: 0 auto;
     }
 }
+
+
+/* ===== TYPOGRAPHY & READABILITY ENHANCEMENTS ===== */
+html {
+    font-size: 18px !important;
+}
+
+body {
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+.hero-title {
+    font-size: 3.6rem !important;
+    line-height: 1.15 !important;
+    font-weight: 800 !important;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem !important;
+    line-height: 1.7 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    max-width: 700px;
+    margin: 0 auto 36px;
+}
+
+.section-title {
+    font-size: 2.6rem !important;
+    line-height: 1.2 !important;
+}
+
+.section-subtitle {
+    font-size: 1.2rem !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    margin-bottom: 48px;
+}
+
+/* Phone Mockup typography */
+.sim-msg {
+    font-size: 1.05rem !important;
+    line-height: 1.55 !important;
+    padding: 14px 18px !important;
+}
+.phone-status {
+    font-size: 0.95rem !important;
+    font-weight: 600;
+}
+.call-timer {
+    font-size: 1rem !important;
+}
+.phone-action-footer {
+    font-size: 0.9rem !important;
+}
+
+/* Scenario selector buttons */
+.scenario-btn {
+    padding: 18px 22px !important;
+}
+.scenario-btn strong {
+    font-size: 1.1rem !important;
+    display: block;
+    margin-bottom: 4px;
+}
+.scenario-btn p {
+    font-size: 0.925rem !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+.scenario-btn span.tag {
+    font-size: 0.85rem !important;
+    padding: 6px 12px !important;
+}
+
+/* Voice Studio typography */
+.voice-tab {
+    font-size: 1.05rem !important;
+    padding: 14px 26px !important;
+}
+.audio-meta h4 {
+    font-size: 1.45rem !important;
+}
+.audio-meta p {
+    font-size: 1.05rem !important;
+}
+.voice-transcript-box {
+    font-size: 1.15rem !important;
+    line-height: 1.65 !important;
+    padding: 20px 24px !important;
+}
+.transcript-badge {
+    font-size: 0.85rem !important;
+    padding: 6px 12px !important;
+}
+
+/* ROI Calculator typography */
+.slider-title {
+    font-size: 1.15rem !important;
+}
+.slider-value-badge {
+    font-size: 1.3rem !important;
+    padding: 6px 16px !important;
+}
+.roi-hero-metric .subtext {
+    font-size: 1rem !important;
+}
+.roi-hero-metric .money {
+    font-size: 3.5rem !important;
+}
+.roi-mini-card .label {
+    font-size: 0.9rem !important;
+}
+.roi-mini-card .val {
+    font-size: 1.5rem !important;
+}
+
+/* Bento grid typography */
+.bento-card h3 {
+    font-size: 1.5rem !important;
+}
+.bento-card p {
+    font-size: 1.08rem !important;
+    line-height: 1.6 !important;
+}
+.bento-pill-tag {
+    font-size: 0.8rem !important;
+    padding: 5px 12px !important;
+}
+
+/* Pricing typography */
+.pricing-title {
+    font-size: 1.6rem !important;
+}
+.pricing-desc {
+    font-size: 1rem !important;
+}
+.pricing-val {
+    font-size: 3.4rem !important;
+}
+.pricing-feature-item {
+    font-size: 1.025rem !important;
+}
+
+/* FAQ typography */
+.faq-question-btn {
+    font-size: 1.2rem !important;
+    padding: 24px 30px !important;
+}
+.faq-answer {
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+}
+
+/* Navigation typography */
+.nav-links a {
+    font-size: 1rem !important;
+    font-weight: 500;
+}
+.logo-name {
+    font-size: 1.4rem !important;
+}
+.status-pill {
+    font-size: 0.925rem !important;
+    padding: 10px 22px !important;
+}
+.status-pill .latency-tag {
+    font-size: 0.85rem !important;
+}

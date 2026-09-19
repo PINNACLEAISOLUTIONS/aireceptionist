@@ -401,19 +401,22 @@ const voiceScenarios = {
         title: "Sarah — Healthcare & Appointment Booking",
         desc: "Warm, empathetic tone trained on clinical intake protocols & scheduling.",
         transcript: "Thank you for calling Dr. Miller's pediatric clinic. Are you calling to book a new appointment or reschedule an existing one?",
-        badge: "Healthcare AI"
+        badge: "Healthcare AI",
+        audioSrc: "assets/sarah-clinic.mp3"
     },
     hvac: {
         title: "Marcus — Home Services & Emergency Dispatch",
         desc: "Urgent, efficient dispatch personality with instant location lookup.",
-        transcript: "Apex Emergency Services. We have an on-call technician in your area right now. Is water actively leaking or heater down?",
-        badge: "Field Dispatch"
+        transcript: "Apex Emergency Services! We have an on-call technician in your area right now. Is water actively leaking or is your heater down?",
+        badge: "Field Dispatch",
+        audioSrc: "assets/marcus-hvac.mp3"
     },
     legal: {
         title: "Elena — Corporate & Legal Intake Concierge",
         desc: "Professional, confidential screening calibrated for law firms.",
-        transcript: "Harrison & Partners Law Group. I can schedule your confidential consultation with attorney David. May I take your name and brief case type?",
-        badge: "Legal Intake"
+        transcript: "Harrison and Partners Law Group. I can schedule your confidential consultation with attorney David. May I take your name and brief case type?",
+        badge: "Legal Intake",
+        audioSrc: "assets/elena-legal.mp3"
     }
 };
 
@@ -430,8 +433,7 @@ function initVoiceStudio() {
 
     let currentScenario = 'clinic';
     let isPlaying = false;
-    let synth = window.speechSynthesis;
-    let currentUtterance = null;
+    let currentAudio = null;
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -443,7 +445,7 @@ function initVoiceStudio() {
             if (data) {
                 if (titleElem) titleElem.textContent = data.title;
                 if (descElem) descElem.textContent = data.desc;
-                if (transcriptElem) transcriptElem.textContent = data.transcript;
+                if (transcriptElem) transcriptElem.textContent = `"${data.transcript}"`;
                 if (badgeElem) badgeElem.textContent = data.badge;
             }
             stopVoice();
@@ -459,40 +461,47 @@ function initVoiceStudio() {
     });
 
     function playVoice() {
+        stopVoice();
         isPlaying = true;
         playerBox.classList.add('playing');
         playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
         
         const data = voiceScenarios[currentScenario];
-        if (synth && data) {
-            synth.cancel();
-            currentUtterance = new SpeechSynthesisUtterance(data.transcript);
-            currentUtterance.rate = 1.0;
-            currentUtterance.pitch = 1.05;
-            
-            // Try picking an English voice
-            const voices = synth.getVoices();
-            const preferred = voices.find(v => v.lang.includes('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha')));
-            if (preferred) currentUtterance.voice = preferred;
-
-            currentUtterance.onend = () => {
-                stopVoice();
-            };
-            currentUtterance.onerror = () => {
-                stopVoice();
-            };
-            synth.speak(currentUtterance);
+        if (data && data.audioSrc) {
+            currentAudio = new Audio(data.audioSrc);
+            currentAudio.play().then(() => {
+                currentAudio.onended = () => stopVoice();
+                currentAudio.onerror = () => fallbackSpeech(data.transcript);
+            }).catch(() => {
+                fallbackSpeech(data.transcript);
+            });
         } else {
-            // Fallback timeout simulation
-            setTimeout(() => {
-                stopVoice();
-            }, 5000);
+            fallbackSpeech(data.transcript);
+        }
+    }
+
+    function fallbackSpeech(text) {
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.onend = () => stopVoice();
+            u.onerror = () => stopVoice();
+            window.speechSynthesis.speak(u);
+        } else {
+            setTimeout(stopVoice, 4000);
         }
     }
 
     function stopVoice() {
         isPlaying = false;
-        if (synth) synth.cancel();
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentAudio = null;
+        }
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+        }
         if (playerBox) playerBox.classList.remove('playing');
         if (playBtn) playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
     }
