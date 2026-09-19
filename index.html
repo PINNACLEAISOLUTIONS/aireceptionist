@@ -24,6 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <link rel="preload" as="image" href="assets/ai_robot_hero.webp" type="image/webp" fetchpriority="high">
     <link rel="stylesheet" href="styles.css">
     <!-- Structured Data for Google / Gemini AI Search Indexing -->
     <script type="application/ld+json">
@@ -233,8 +234,23 @@
             <div class="hero-visual-col animate-fade-in-delay">
                 <div class="showcase-glow-back"></div>
                 <div class="showcase-frame">
+                    <div class="showcase-header-bar">
+                        <div class="header-traffic-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="header-title-badge">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                            <span>NEURAL RECEPTIONIST CONSOLE</span>
+                        </div>
+                        <div class="header-latency-pill">
+                            <span class="latency-dot"></span>
+                            <span>LATENCY 138ms</span>
+                        </div>
+                    </div>
                     <div class="showcase-img-container">
-                        <img src="assets/ai_robot_hero.jpg" alt="Pinnacle AI Robot Receptionist" class="showcase-img">
+                        <img src="assets/ai_robot_hero.webp" alt="Pinnacle AI Robot Receptionist" class="showcase-img" loading="eager" fetchpriority="high" decoding="async" width="1376" height="768">
                         <div class="showcase-gradient-scrim"></div>
                         <div class="showcase-hud-top">
                             <span class="hud-live-dot"></span>
@@ -243,6 +259,22 @@
                                 <span></span><span></span><span></span><span></span>
                             </div>
                         </div>
+                        <div class="showcase-hud-bottom">
+                            <div class="hud-call-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </div>
+                            <div class="hud-call-info">
+                                <div class="hud-call-title">Forwarded Line Answering</div>
+                                <div class="hud-call-sub">
+                                    <span>High Springs Pediatrics</span> • <span>0.14s Response</span>
+                                </div>
+                            </div>
+                            <span class="hud-call-badge">Live</span>
+                        </div>
+                    </div>
+                </div>
                         <div class="showcase-hud-bottom">
                             <div class="hud-call-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
