@@ -2239,10 +2239,11 @@ button {
 }
 
 .glow-text {
-    background: linear-gradient(135deg, #93C5FD 0%, #38BDF8 50%, #FFFFFF 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
+    color: #FFFFFF !important;
+    background: none !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    text-shadow: 0 0 25px rgba(0, 229, 255, 0.8), 0 0 50px rgba(0, 217, 146, 0.4), 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+    filter: none !important;
 }
 
 /* Enlarged Hero Image Showcase without Overlays */
@@ -2550,5 +2551,154 @@ html, body {
 
     .cta-form-container {
         padding: 16px 10px !important;
+    }
+}
+
+
+/* Showcase Frame Displaying the FULL 16:9 AI Robot Image */
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1.08fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.showcase-frame {
+    position: relative;
+    border-radius: 24px;
+    background: var(--color-surface-card);
+    border: 1.5px solid rgba(0, 217, 146, 0.45);
+    padding: 10px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85),
+                0 0 55px rgba(0, 217, 146, 0.28),
+                0 0 100px rgba(0, 229, 255, 0.16);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.showcase-frame:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 217, 146, 0.7);
+    box-shadow: 0 28px 75px rgba(0, 0, 0, 0.9),
+                0 0 75px rgba(0, 217, 146, 0.38),
+                0 0 120px rgba(0, 229, 255, 0.24);
+}
+
+.showcase-img-container {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000000;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.showcase-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+}
+
+/* Specific Cell Phone Fix: Form Submit Button, Lettering & Container */
+@media (max-width: 768px) {
+    .btn, .btn-large, .btn-full {
+        white-space: normal !important;
+        text-align: center !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 15px 16px !important;
+        font-size: 1.02rem !important;
+        line-height: 1.3 !important;
+    }
+
+    #contactSubmitBtn span {
+        display: inline-block;
+        white-space: normal !important;
+        word-break: normal !important;
+    }
+
+    .cta-wrapper {
+        padding: 24px 14px !important;
+        gap: 24px !important;
+        border-radius: 18px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    .cta-content h2 {
+        font-size: 1.48rem !important;
+        line-height: 1.25 !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+    }
+
+    .cta-content p {
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+        word-break: normal !important;
+    }
+
+    .cta-form-container {
+        padding: 18px 12px !important;
+        border-radius: 14px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .form-group label {
+        font-size: 0.85rem !important;
+        white-space: normal !important;
+        word-break: normal !important;
+    }
+
+    .form-input, .form-select {
+        font-size: 16px !important;
+        padding: 12px 14px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Mobile AI Robot Window */
+    .showcase-img-container {
+        aspect-ratio: 16 / 9 !important;
+        width: 100% !important;
+    }
+
+    .showcase-img {
+        width: 100% !important;
+        height: 100% !important;
+        max-height: none !important;
+        min-height: auto !important;
+        object-fit: cover !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .cta-wrapper {
+        padding: 18px 10px !important;
+        gap: 18px !important;
+    }
+
+    .cta-content h2 {
+        font-size: 1.35rem !important;
+    }
+
+    .cta-form-container {
+        padding: 14px 10px !important;
+    }
+
+    #contactSubmitBtn {
+        font-size: 0.98rem !important;
+        padding: 14px 10px !important;
     }
 }
