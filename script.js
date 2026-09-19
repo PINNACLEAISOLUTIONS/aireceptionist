@@ -406,6 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPricingToggle();
     initFaqAccordion();
     initContactForm();
+    initScrollRevealObserver();
 });
 
 // 1. VOICE STUDIO MODULE
@@ -739,4 +740,37 @@ function initContactForm() {
             form.submit();
         }
     });
+}
+
+
+// 7. SCROLL REVEAL ANIMATIONS MODULE
+function initScrollRevealObserver() {
+    const selectors = [
+        '.bento-card',
+        '.step',
+        '.pricing-card',
+        '.industry-card',
+        '.faq-card',
+        '.roi-box',
+        '.showcase-frame',
+        '.cta-wrapper'
+    ];
+
+    const elements = document.querySelectorAll(selectors.join(', '));
+    elements.forEach(el => el.classList.add('scroll-reveal-box'));
+
+    if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        elements.forEach(el => obs.observe(el));
+    } else {
+        elements.forEach(el => el.classList.add('is-revealed'));
+    }
 }
