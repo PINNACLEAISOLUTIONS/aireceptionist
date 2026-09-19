@@ -320,10 +320,9 @@ ul {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 130px 0 70px;
+    padding: 120px 0 60px;
     background-color: var(--bg-primary);
 }
 
@@ -332,9 +331,8 @@ ul {
     inset: 0;
     z-index: 0;
     background: 
-        linear-gradient(180deg, rgba(18, 19, 22, 0.28) 0%, rgba(18, 19, 22, 0.48) 55%, #121316 100%),
-        radial-gradient(ellipse 65% 65% at 50% 45%, rgba(18, 19, 22, 0.55) 0%, rgba(18, 19, 22, 0.2) 50%, rgba(18, 19, 22, 0.75) 100%),
-        url('assets/ai_robot_hero.jpg') 65% 25% / cover no-repeat;
+        linear-gradient(180deg, rgba(18, 19, 22, 0.35) 0%, rgba(18, 19, 22, 0.12) 35%, rgba(18, 19, 22, 0.45) 75%, #121316 100%),
+        url('assets/ai_robot_hero.jpg') 88% 25% / cover no-repeat;
 }
 
 .hero-gradient, .particles-bg, .floating-elements {
@@ -344,9 +342,29 @@ ul {
 .hero-content {
     position: relative;
     z-index: 2;
-    text-align: center;
-    max-width: 920px;
-    margin: 0 auto;
+    text-align: left;
+    max-width: 720px;
+    margin-left: max(4%, calc((100% - 1280px) / 2 + 20px));
+    margin-right: auto;
+    background: rgba(18, 21, 30, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 44px 38px 36px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(26, 115, 232, 0.1);
+}
+
+.hero-content .status-pill-wrapper {
+    justify-content: flex-start;
+}
+
+.hero-content .hero-cta {
+    justify-content: flex-start;
+}
+
+.hero-content .hero-stats {
+    justify-content: flex-start;
 }
 
 /* Status Pill in Hero */
@@ -2697,9 +2715,29 @@ ul {
 .hero-content {
     position: relative;
     z-index: 2;
-    text-align: center;
-    max-width: 920px;
-    margin: 0 auto;
+    text-align: left;
+    max-width: 720px;
+    margin-left: max(4%, calc((100% - 1280px) / 2 + 20px));
+    margin-right: auto;
+    background: rgba(18, 21, 30, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 44px 38px 36px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(26, 115, 232, 0.1);
+}
+
+.hero-content .status-pill-wrapper {
+    justify-content: flex-start;
+}
+
+.hero-content .hero-cta {
+    justify-content: flex-start;
+}
+
+.hero-content .hero-stats {
+    justify-content: flex-start;
 }
 
 /* Status Pill in Hero */
@@ -3133,4 +3171,27 @@ ul {
     background: var(--google-blue) !important;
     color: #FFFFFF !important;
     box-shadow: 0 4px 20px rgba(26, 115, 232, 0.4) !important;
+}
+
+/* ===== MOBILE HERO FROSTED GLASS OVERRIDES ===== */
+@media (max-width: 900px) {
+    .hero {
+        align-items: center;
+        padding: 100px 0 50px;
+    }
+    .hero-bg {
+        background-position: center 20% !important;
+    }
+    .hero-content {
+        text-align: center !important;
+        margin: 0 12px !important;
+        max-width: 100% !important;
+        padding: 24px 16px 20px !important;
+        border-radius: 20px !important;
+    }
+    .hero-content .status-pill-wrapper,
+    .hero-content .hero-cta,
+    .hero-content .hero-stats {
+        justify-content: center !important;
+    }
 }

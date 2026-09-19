@@ -412,21 +412,21 @@ const voiceScenarios = {
     clinic: {
         title: "Sarah — Healthcare & Appointment Booking",
         desc: "Warm, empathetic tone trained on clinical intake protocols & scheduling.",
-        transcript: "Thank you for calling Dr. Miller's pediatric clinic. Are you calling to book a new appointment or reschedule an existing one?",
+        transcript: "Thank you for calling Metro Health and Dental! This is Sarah, your patient coordinator. Are you calling to book a new appointment, or reschedule an existing visit?",
         badge: "Healthcare AI",
         audioSrc: "assets/sarah-clinic.mp3"
     },
     hvac: {
         title: "Marcus — Home Services & Emergency Dispatch",
         desc: "Urgent, efficient dispatch personality with instant location lookup.",
-        transcript: "Apex Emergency Services! We have an on-call technician in your area right now. Is water actively leaking or is your heater down?",
+        transcript: "Apex Emergency Services, Marcus speaking. We have an on-call technician available in your area right now. Is water actively leaking, or is your AC or heating down?",
         badge: "Field Dispatch",
         audioSrc: "assets/marcus-hvac.mp3"
     },
     legal: {
         title: "Elena — Corporate & Legal Intake Concierge",
         desc: "Professional, confidential screening calibrated for law firms.",
-        transcript: "Harrison and Partners Law Group. I can schedule your confidential consultation with attorney David. May I take your name and brief case type?",
+        transcript: "Harrison and Partners Law Group, Elena speaking. I can schedule your confidential consultation with attorney David. May I please take your name and a brief description of your matter?",
         badge: "Legal Intake",
         audioSrc: "assets/elena-legal.mp3"
     }
