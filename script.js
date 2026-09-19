@@ -383,3 +383,290 @@ function setupParticleField(canvas, color) {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
+
+
+// ===== DEVELOPER-QUALITY INTERACTIVE MODULES =====
+
+document.addEventListener('DOMContentLoaded', () => {
+    initVoiceStudio();
+    initCallSimulator();
+    initRoiCalculator();
+    initPricingToggle();
+    initFaqAccordion();
+});
+
+// 1. VOICE STUDIO MODULE
+const voiceScenarios = {
+    clinic: {
+        title: "Sarah — Healthcare & Appointment Booking",
+        desc: "Warm, empathetic tone trained on clinical intake protocols & scheduling.",
+        transcript: "Thank you for calling Dr. Miller's pediatric clinic. Are you calling to book a new appointment or reschedule an existing one?",
+        badge: "Healthcare AI"
+    },
+    hvac: {
+        title: "Marcus — Home Services & Emergency Dispatch",
+        desc: "Urgent, efficient dispatch personality with instant location lookup.",
+        transcript: "Apex Emergency Services. We have an on-call technician in your area right now. Is water actively leaking or heater down?",
+        badge: "Field Dispatch"
+    },
+    legal: {
+        title: "Elena — Corporate & Legal Intake Concierge",
+        desc: "Professional, confidential screening calibrated for law firms.",
+        transcript: "Harrison & Partners Law Group. I can schedule your confidential consultation with attorney David. May I take your name and brief case type?",
+        badge: "Legal Intake"
+    }
+};
+
+function initVoiceStudio() {
+    const tabs = document.querySelectorAll('.voice-tab');
+    const playBtn = document.getElementById('voicePlayBtn');
+    const playerBox = document.getElementById('voicePlayerBox');
+    const titleElem = document.getElementById('voiceTitle');
+    const descElem = document.getElementById('voiceDesc');
+    const transcriptElem = document.getElementById('voiceTranscript');
+    const badgeElem = document.getElementById('voiceBadge');
+    
+    if (!playBtn || !tabs.length) return;
+
+    let currentScenario = 'clinic';
+    let isPlaying = false;
+    let synth = window.speechSynthesis;
+    let currentUtterance = null;
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentScenario = tab.dataset.scenario;
+            
+            const data = voiceScenarios[currentScenario];
+            if (data) {
+                if (titleElem) titleElem.textContent = data.title;
+                if (descElem) descElem.textContent = data.desc;
+                if (transcriptElem) transcriptElem.textContent = data.transcript;
+                if (badgeElem) badgeElem.textContent = data.badge;
+            }
+            stopVoice();
+        });
+    });
+
+    playBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            stopVoice();
+        } else {
+            playVoice();
+        }
+    });
+
+    function playVoice() {
+        isPlaying = true;
+        playerBox.classList.add('playing');
+        playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+        
+        const data = voiceScenarios[currentScenario];
+        if (synth && data) {
+            synth.cancel();
+            currentUtterance = new SpeechSynthesisUtterance(data.transcript);
+            currentUtterance.rate = 1.0;
+            currentUtterance.pitch = 1.05;
+            
+            // Try picking an English voice
+            const voices = synth.getVoices();
+            const preferred = voices.find(v => v.lang.includes('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha')));
+            if (preferred) currentUtterance.voice = preferred;
+
+            currentUtterance.onend = () => {
+                stopVoice();
+            };
+            currentUtterance.onerror = () => {
+                stopVoice();
+            };
+            synth.speak(currentUtterance);
+        } else {
+            // Fallback timeout simulation
+            setTimeout(() => {
+                stopVoice();
+            }, 5000);
+        }
+    }
+
+    function stopVoice() {
+        isPlaying = false;
+        if (synth) synth.cancel();
+        if (playerBox) playerBox.classList.remove('playing');
+        if (playBtn) playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+    }
+}
+
+// 2. LIVE CALL SIMULATOR MODULE
+const callScripts = {
+    dental: [
+        { sender: 'caller', text: "Hi, I have a cracked tooth and severe pain. Do you have any emergency openings today?" },
+        { sender: 'ai', text: "I'm so sorry you're in pain! We have an emergency reservation open at 2:30 PM today with Dr. Miller. Shall I lock that in for you?" },
+        { sender: 'caller', text: "Yes please, my name is Alex Reed and my number is (555) 234-5678." },
+        { sender: 'ai', text: "All set, Alex! You are booked for 2:30 PM today. A confirmation SMS with directions was just sent to your phone." }
+    ],
+    hvac: [
+        { sender: 'caller', text: "Hello, our air conditioning stopped working and our house is 86 degrees. Can someone come out?" },
+        { sender: 'ai', text: "We can help right away. We have an on-call HVAC specialist in your area with arrival between 4:00 PM and 5:00 PM today. Would that work?" },
+        { sender: 'caller', text: "That would be a lifesaver. Yes, address is 482 Maple Lane." },
+        { sender: 'ai', text: "Got it! Tech Carlos is dispatched to 482 Maple Lane for 4:00 PM. You'll receive live GPS tracking via text." }
+    ],
+    legal: [
+        { sender: 'caller', text: "Hi, I need to speak to an attorney about a commercial lease dispute." },
+        { sender: 'ai', text: "I can assist with that. Our senior partner conducts 15-minute preliminary strategy reviews every Tuesday and Thursday. Would Thursday at 10 AM suit you?" },
+        { sender: 'caller', text: "Thursday at 10 AM works great." },
+        { sender: 'ai', text: "Perfect. I've reserved Thursday at 10:00 AM on the partner's calendar and emailed you the client portal link." }
+    ]
+};
+
+function initCallSimulator() {
+    const triggerBtn = document.getElementById('triggerSimCall');
+    const scrollContainer = document.getElementById('phoneChatScroll');
+    const timerElem = document.getElementById('simCallTimer');
+    const scenarioBtns = document.querySelectorAll('.scenario-btn');
+    const successBadge = document.getElementById('simSuccessBadge');
+    
+    if (!triggerBtn || !scrollContainer) return;
+
+    let selectedScenario = 'dental';
+    let timerInterval = null;
+    let currentStep = 0;
+
+    scenarioBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            scenarioBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedScenario = btn.dataset.scenario;
+            resetCall();
+        });
+    });
+
+    triggerBtn.addEventListener('click', () => {
+        startSimulation();
+    });
+
+    function resetCall() {
+        clearInterval(timerInterval);
+        if (timerElem) timerElem.textContent = "00:00";
+        if (successBadge) successBadge.style.display = "none";
+        scrollContainer.innerHTML = '<div class="sim-msg ai">Incoming call ready. Click "Simulate Live Call" to test real-time voice handling.</div>';
+    }
+
+    function startSimulation() {
+        resetCall();
+        let seconds = 0;
+        timerInterval = setInterval(() => {
+            seconds++;
+            const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const secs = String(seconds % 60).padStart(2, '0');
+            if (timerElem) timerElem.textContent = `${mins}:${secs}`;
+        }, 1000);
+
+        scrollContainer.innerHTML = '';
+        const script = callScripts[selectedScenario];
+        let delay = 300;
+
+        script.forEach((msg, idx) => {
+            setTimeout(() => {
+                const msgElem = document.createElement('div');
+                msgElem.className = `sim-msg ${msg.sender}`;
+                msgElem.textContent = msg.text;
+                scrollContainer.appendChild(msgElem);
+                scrollContainer.scrollTop = scrollContainer.scrollHeight;
+
+                if (idx === script.length - 1) {
+                    if (successBadge) successBadge.style.display = "inline-flex";
+                    setTimeout(() => clearInterval(timerInterval), 3000);
+                }
+            }, delay);
+            delay += (idx % 2 === 0 ? 1800 : 2200);
+        });
+    }
+}
+
+// 3. DYNAMIC ROI CALCULATOR MODULE
+function initRoiCalculator() {
+    const callsSlider = document.getElementById('roiCallsSlider');
+    const valueSlider = document.getElementById('roiValueSlider');
+    const callsValText = document.getElementById('roiCallsVal');
+    const dealValText = document.getElementById('roiDealVal');
+    const revenueOutput = document.getElementById('roiRevenueOutput');
+    const hoursOutput = document.getElementById('roiHoursOutput');
+    const savingsOutput = document.getElementById('roiSavingsOutput');
+    const roiMultiplier = document.getElementById('roiMultiplier');
+
+    if (!callsSlider || !valueSlider) return;
+
+    function calculate() {
+        const calls = parseInt(callsSlider.value, 10);
+        const dealVal = parseInt(valueSlider.value, 10);
+
+        callsValText.textContent = `${calls} calls`;
+        dealValText.textContent = `$${dealVal.toLocaleString()}`;
+
+        // Conversion benchmark: 32% of answered calls convert into customers
+        const converted = Math.round(calls * 0.32);
+        const monthlyRevenue = converted * dealVal;
+        const hoursSaved = Math.round((calls * 8) / 60);
+        const receptionistSavings = 3500; // Average monthly full-time front desk salary
+        const totalImpact = monthlyRevenue + receptionistSavings;
+        const multiplier = Math.max(2, Math.round((monthlyRevenue / 199)));
+
+        if (revenueOutput) revenueOutput.textContent = `$${monthlyRevenue.toLocaleString()}`;
+        if (hoursOutput) hoursOutput.textContent = `${hoursSaved} hrs/mo`;
+        if (savingsOutput) savingsOutput.textContent = `$${totalImpact.toLocaleString()}`;
+        if (roiMultiplier) roiMultiplier.textContent = `${multiplier}x ROI`;
+    }
+
+    callsSlider.addEventListener('input', calculate);
+    valueSlider.addEventListener('input', calculate);
+    calculate();
+}
+
+// 4. PRICING TOGGLE MODULE
+function initPricingToggle() {
+    const toggle = document.getElementById('billingToggle');
+    const starterPrice = document.getElementById('priceStarter');
+    const growthPrice = document.getElementById('priceGrowth');
+    const entPrice = document.getElementById('priceEnt');
+    const monthlyLabel = document.getElementById('labelMonthly');
+    const annualLabel = document.getElementById('labelAnnual');
+
+    if (!toggle) return;
+
+    let isAnnual = false;
+    toggle.addEventListener('click', () => {
+        isAnnual = !isAnnual;
+        toggle.classList.toggle('active', isAnnual);
+        if (monthlyLabel) monthlyLabel.classList.toggle('active', !isAnnual);
+        if (annualLabel) annualLabel.classList.toggle('active', isAnnual);
+
+        if (isAnnual) {
+            if (starterPrice) starterPrice.textContent = '159';
+            if (growthPrice) growthPrice.textContent = '359';
+            if (entPrice) entPrice.textContent = '719';
+        } else {
+            if (starterPrice) starterPrice.textContent = '199';
+            if (growthPrice) growthPrice.textContent = '449';
+            if (entPrice) entPrice.textContent = '899';
+        }
+    });
+}
+
+// 5. FAQ ACCORDION MODULE
+function initFaqAccordion() {
+    const faqCards = document.querySelectorAll('.faq-card');
+    faqCards.forEach(card => {
+        const btn = card.querySelector('.faq-question-btn');
+        if (btn) {
+            btn.addEventListener('click', () => {
+                const isOpen = card.classList.contains('open');
+                faqCards.forEach(c => c.classList.remove('open'));
+                if (!isOpen) {
+                    card.classList.add('open');
+                }
+            });
+        }
+    });
+}
