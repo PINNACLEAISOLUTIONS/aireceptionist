@@ -74,19 +74,52 @@
         <div class="container nav-container">
             <a href="#" class="logo">
                 <span class="logo-mark">
-                    <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-                        <rect x="1" y="1" width="34" height="34" rx="10" fill="url(#logoGradNav)" opacity="0.15"/>
-                        <rect x="1" y="1" width="34" height="34" rx="10" stroke="url(#logoGradNav)" stroke-width="1.5"/>
-                        <g transform="translate(9,9) scale(0.75)" fill="url(#logoGradNav)">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                        </g>
-                        <defs>
-                            <linearGradient id="logoGradNav" x1="1" y1="1" x2="35" y2="35">
-                                <stop offset="0%" stop-color="#00edff"/>
-                                <stop offset="100%" stop-color="#a855f7"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
+                    <svg width="38" height="38" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="phone-3d-svg">
+  <defs>
+    <linearGradient id="bgGrad3D" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="45%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="bevelLight" x1="8" y1="4" x2="40" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#60A5FA" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="handset3D" x1="14" y1="12" x2="34" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#E2E8F0"/>
+      <stop offset="65%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="specularRim" x1="14" y1="12" x2="26" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#93C5FD" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow3D" x="0" y="2" width="48" height="46" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#1D4ED8" flood-opacity="0.55"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="handsetShadow" x="8" y="8" width="32" height="32" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow3D)">
+    <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#bgGrad3D)"/>
+    <rect x="4.75" y="4.75" width="38.5" height="38.5" rx="11.25" stroke="url(#bevelLight)" stroke-width="1.5"/>
+    <rect x="5.5" y="5.5" width="37" height="18" rx="10" fill="url(#bevelLight)" opacity="0.15"/>
+  </g>
+  <g filter="url(#handsetShadow)">
+    <path d="M16 14.5C15 14.5 13.5 15.5 13.5 17C13.5 24.5 21 34 30.5 34.5C32 34.5 33 33 33 31.8L30.2 26.5C29.6 25.5 28.2 25.2 27.2 25.8L25.2 27.2C21.8 25.3 19.5 22.8 17.8 19.5L19.2 17.5C19.8 16.5 19.5 15.1 18.5 14.5L16 14.5Z" fill="#0A101D" opacity="0.45"/>
+    <path d="M15.5 13.5C14.5 13.5 13 14.8 13 16.5C13 24.5 21 33.5 31 33.5C32.7 33.5 34 32 34 30.5L30.8 25.2C30.2 24.2 28.8 23.9 27.8 24.6L25.8 26C22.2 24 20.2 21.8 18.2 18.2L19.6 16.2C20.3 15.2 20 13.8 19 13.2L15.5 13.5Z" fill="url(#handset3D)"/>
+    <path d="M15.5 13.5C14.5 13.5 13 14.8 13 16.5C13 20.5 15.5 25 18.5 28C21.5 31 26 33.5 31 33.5C32.7 33.5 34 32 34 30.5" stroke="url(#specularRim)" stroke-width="1.6" stroke-linecap="round"/>
+    <ellipse cx="16.5" cy="15.5" rx="3.2" ry="2.2" transform="rotate(-30 16.5 15.5)" fill="#FFFFFF" opacity="0.85"/>
+    <ellipse cx="31" cy="29.5" rx="3" ry="2.2" transform="rotate(-35 31 29.5)" fill="#93C5FD" opacity="0.9"/>
+  </g>
+  <path d="M30 15C32.5 17 34 19.5 34.5 22.5" stroke="#60A5FA" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
+  <path d="M34 12C37.5 15 39.5 18.8 40 23" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+</svg>
                 </span>
                 <span class="logo-text">
                     <span class="logo-name">PINNACLE</span>
@@ -190,7 +223,7 @@
                     </div>
                     <div class="stat-divider"></div>
                     <div class="stat">
-                        <span class="stat-number" data-count="1">&lt; 1</span><span class="stat-suffix">-Min</span>
+                        <span class="stat-number">Quick</span>
                         <span class="stat-label">Setup Time</span>
                     </div>
                 </div>
@@ -319,7 +352,7 @@
             <div class="voice-studio-card">
                 <div class="voice-tabs">
                     <button class="voice-tab active" data-scenario="clinic">
-                        <span>👩‍⚕️ Sarah (Clinic & Dental)</span>
+                        <span>👩‍⚕️ Riley (Vapi Healthcare AI)</span>
                     </button>
                     <button class="voice-tab" data-scenario="hvac">
                         <span>👨‍🔧 Marcus (Home Services)</span>
@@ -334,8 +367,8 @@
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     </button>
                     <div class="audio-meta">
-                        <h4 id="voiceTitle">Sarah — Healthcare & Appointment Booking</h4>
-                        <p id="voiceDesc">Warm, empathetic tone trained on clinical intake protocols & scheduling.</p>
+                        <h4 id="voiceTitle">Riley — Healthcare & Pediatric Receptionist</h4>
+                        <p id="voiceDesc">Ultra-expressive Vapi voice AI trained on real pediatric clinic triage, scheduling, and caller intake protocols.</p>
                         <div class="waveform-container">
                             <div class="wave-bar" style="animation-delay: 0.1s"></div>
                             <div class="wave-bar" style="animation-delay: 0.3s"></div>
@@ -358,8 +391,8 @@
                 </div>
 
                 <div class="voice-transcript-box">
-                    <span class="transcript-badge" id="voiceBadge">Healthcare AI</span>
-                    <span id="voiceTranscript">"Thank you for calling Dr. Miller's pediatric clinic. Are you calling to book a new appointment or reschedule an existing one?"</span>
+                    <span class="transcript-badge" id="voiceBadge">Live Vapi Voice</span>
+                    <span id="voiceTranscript">"Thank you for calling High Springs Pediatrics and Primary Care. My name is Riley. How can I assist you today?"</span>
                 </div>
             </div>
         </div>
@@ -964,19 +997,52 @@
                 <div class="footer-brand">
                     <a href="#" class="logo">
                         <span class="logo-mark">
-                            <svg width="34" height="34" viewBox="0 0 36 36" fill="none">
-                                <rect x="1" y="1" width="34" height="34" rx="10" fill="url(#logoGradFooter)" opacity="0.15"/>
-                                <rect x="1" y="1" width="34" height="34" rx="10" stroke="url(#logoGradFooter)" stroke-width="1.5"/>
-                                <g transform="translate(9,9) scale(0.75)" fill="url(#logoGradFooter)">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                                </g>
-                                <defs>
-                                    <linearGradient id="logoGradFooter" x1="1" y1="1" x2="35" y2="35">
-                                        <stop offset="0%" stop-color="#e8a83c"/>
-                                        <stop offset="100%" stop-color="#ff6b4a"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
+                            <svg width="38" height="38" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="phone-3d-svg">
+  <defs>
+    <linearGradient id="bgGrad3D" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="45%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="bevelLight" x1="8" y1="4" x2="40" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#60A5FA" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="handset3D" x1="14" y1="12" x2="34" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="25%" stop-color="#E2E8F0"/>
+      <stop offset="65%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+    <linearGradient id="specularRim" x1="14" y1="12" x2="26" y2="24" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#93C5FD" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow3D" x="0" y="2" width="48" height="46" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#1D4ED8" flood-opacity="0.55"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="handsetShadow" x="8" y="8" width="32" height="32" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow3D)">
+    <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#bgGrad3D)"/>
+    <rect x="4.75" y="4.75" width="38.5" height="38.5" rx="11.25" stroke="url(#bevelLight)" stroke-width="1.5"/>
+    <rect x="5.5" y="5.5" width="37" height="18" rx="10" fill="url(#bevelLight)" opacity="0.15"/>
+  </g>
+  <g filter="url(#handsetShadow)">
+    <path d="M16 14.5C15 14.5 13.5 15.5 13.5 17C13.5 24.5 21 34 30.5 34.5C32 34.5 33 33 33 31.8L30.2 26.5C29.6 25.5 28.2 25.2 27.2 25.8L25.2 27.2C21.8 25.3 19.5 22.8 17.8 19.5L19.2 17.5C19.8 16.5 19.5 15.1 18.5 14.5L16 14.5Z" fill="#0A101D" opacity="0.45"/>
+    <path d="M15.5 13.5C14.5 13.5 13 14.8 13 16.5C13 24.5 21 33.5 31 33.5C32.7 33.5 34 32 34 30.5L30.8 25.2C30.2 24.2 28.8 23.9 27.8 24.6L25.8 26C22.2 24 20.2 21.8 18.2 18.2L19.6 16.2C20.3 15.2 20 13.8 19 13.2L15.5 13.5Z" fill="url(#handset3D)"/>
+    <path d="M15.5 13.5C14.5 13.5 13 14.8 13 16.5C13 20.5 15.5 25 18.5 28C21.5 31 26 33.5 31 33.5C32.7 33.5 34 32 34 30.5" stroke="url(#specularRim)" stroke-width="1.6" stroke-linecap="round"/>
+    <ellipse cx="16.5" cy="15.5" rx="3.2" ry="2.2" transform="rotate(-30 16.5 15.5)" fill="#FFFFFF" opacity="0.85"/>
+    <ellipse cx="31" cy="29.5" rx="3" ry="2.2" transform="rotate(-35 31 29.5)" fill="#93C5FD" opacity="0.9"/>
+  </g>
+  <path d="M30 15C32.5 17 34 19.5 34.5 22.5" stroke="#60A5FA" stroke-width="2.2" stroke-linecap="round" opacity="0.9"/>
+  <path d="M34 12C37.5 15 39.5 18.8 40 23" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+</svg>
                         </span>
                         <span class="logo-text">
                             <span class="logo-name">PINNACLE</span>

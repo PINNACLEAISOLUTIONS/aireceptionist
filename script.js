@@ -410,11 +410,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // 1. VOICE STUDIO MODULE
 const voiceScenarios = {
     clinic: {
-        title: "Sarah — Healthcare & Appointment Booking",
-        desc: "Warm, empathetic tone trained on clinical intake protocols & scheduling.",
-        transcript: "Thank you for calling Metro Health and Dental! This is Sarah, your patient coordinator. Are you calling to book a new appointment, or reschedule an existing visit?",
-        badge: "Healthcare AI",
-        audioSrc: "assets/sarah-clinic.mp3"
+        title: "Riley — Healthcare & Pediatric Receptionist",
+        desc: "Ultra-expressive Vapi voice AI trained on real pediatric clinic triage, scheduling, and caller intake protocols.",
+        transcript: "Thank you for calling High Springs Pediatrics and Primary Care. My name is Riley. How can I assist you today?",
+        badge: "Live Vapi Voice",
+        audioSrc: "assets/riley-clinic.mp3"
     },
     hvac: {
         title: "Marcus — Home Services & Emergency Dispatch",

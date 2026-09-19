@@ -239,21 +239,24 @@ ul {
 
 .logo-name {
     font-weight: 800;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    color: var(--text-primary);
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    line-height: 1.08;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .logo-tag {
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 3px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    background: var(--gradient-primary);
+    background: linear-gradient(90deg, #60A5FA 0%, #A855F7 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    margin-top: 2px;
     animation: logoShine 4s linear infinite;
 }
 
@@ -3435,4 +3438,230 @@ ul {
     .hud-call-sub {
         font-size: 0.68rem;
     }
+}
+
+/* ==========================================================================
+   DIFFERENTIATED SECTION BACKGROUNDS & ENHANCED CARD GLOWS
+   ========================================================================== */
+
+/* 1. Live Call Simulator - Command Center Dark Theme */
+.call-simulator-section {
+    padding: 100px 0 !important;
+    background: 
+        radial-gradient(circle 500px at 15% 45%, rgba(66, 133, 244, 0.12) 0%, transparent 70%),
+        radial-gradient(circle 450px at 85% 55%, rgba(52, 168, 83, 0.1) 0%, transparent 70%),
+        radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 28px 28px,
+        #0E1117 !important;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sim-phone {
+    box-shadow: 
+        0 25px 60px -15px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(66, 133, 244, 0.3),
+        0 0 35px rgba(66, 133, 244, 0.22) !important;
+}
+
+.sim-controls-panel {
+    background: rgba(22, 26, 38, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(66, 133, 244, 0.1) !important;
+    backdrop-filter: blur(16px);
+}
+
+/* 2. Voice Studio - Acoustic Indigo Soundstage */
+.voice-studio-section {
+    padding: 100px 0 !important;
+    background: 
+        radial-gradient(ellipse 70% 60% at 50% 35%, rgba(139, 92, 246, 0.12) 0%, rgba(66, 133, 244, 0.08) 50%, transparent 80%),
+        radial-gradient(circle 400px at 90% 80%, rgba(234, 67, 53, 0.05) 0%, transparent 60%),
+        #10121C !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.voice-studio-card {
+    background: rgba(22, 26, 40, 0.85) !important;
+    border: 1px solid rgba(139, 92, 246, 0.3) !important;
+    box-shadow: 
+        0 30px 70px -15px rgba(0, 0, 0, 0.85),
+        0 0 40px rgba(139, 92, 246, 0.2),
+        0 0 70px rgba(66, 133, 244, 0.12) !important;
+}
+
+/* 3. Features Section - Google Quad-Spotlight Ambient Canvas */
+.features {
+    padding: 110px 0 !important;
+    background: 
+        radial-gradient(circle 500px at 15% 20%, rgba(66, 133, 244, 0.08) 0%, transparent 70%),
+        radial-gradient(circle 500px at 85% 20%, rgba(251, 188, 5, 0.07) 0%, transparent 70%),
+        radial-gradient(circle 500px at 20% 80%, rgba(52, 168, 83, 0.07) 0%, transparent 70%),
+        radial-gradient(circle 500px at 80% 80%, rgba(234, 67, 53, 0.06) 0%, transparent 70%),
+        #13151D !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Enhanced Glow for Feature Cards */
+.feature-card {
+    background: #1E222D !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease !important;
+}
+
+.feature-card:nth-child(1) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(66, 133, 244, 0.18) !important;
+}
+.feature-card:nth-child(1):hover {
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 45px rgba(66, 133, 244, 0.4) !important;
+}
+
+.feature-card:nth-child(2) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(52, 168, 83, 0.18) !important;
+}
+.feature-card:nth-child(2):hover {
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 45px rgba(52, 168, 83, 0.4) !important;
+}
+
+.feature-card:nth-child(3) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(251, 188, 5, 0.18) !important;
+}
+.feature-card:nth-child(3):hover {
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 45px rgba(251, 188, 5, 0.4) !important;
+}
+
+.feature-card:nth-child(4) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(234, 67, 53, 0.18) !important;
+}
+.feature-card:nth-child(4):hover {
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 45px rgba(234, 67, 53, 0.4) !important;
+}
+
+.feature-card:nth-child(5) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(66, 133, 244, 0.18) !important;
+}
+.feature-card:nth-child(5):hover {
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 45px rgba(66, 133, 244, 0.4) !important;
+}
+
+.feature-card:nth-child(6) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 24px rgba(52, 168, 83, 0.18) !important;
+}
+.feature-card:nth-child(6):hover {
+    box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.8), 0 0 45px rgba(52, 168, 83, 0.4) !important;
+}
+
+/* 4. How It Works Steps with Ambient Flow Glow */
+.how-it-works {
+    padding: 100px 0 !important;
+    background: 
+        radial-gradient(ellipse 60% 50% at 50% 50%, rgba(66, 133, 244, 0.08) 0%, transparent 70%),
+        #0F1117 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.step:nth-child(1) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 22px rgba(66, 133, 244, 0.16) !important;
+}
+.step:nth-child(1):hover {
+    box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.8), 0 0 38px rgba(66, 133, 244, 0.35) !important;
+}
+
+.step:nth-child(2) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 22px rgba(52, 168, 83, 0.16) !important;
+}
+.step:nth-child(2):hover {
+    box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.8), 0 0 38px rgba(52, 168, 83, 0.35) !important;
+}
+
+.step:nth-child(3) {
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 22px rgba(251, 188, 5, 0.16) !important;
+}
+.step:nth-child(3):hover {
+    box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.8), 0 0 38px rgba(251, 188, 5, 0.35) !important;
+}
+
+/* 5. ROI Calculator - Financial Growth Emerald Aura */
+.roi-calculator-section {
+    padding: 100px 0 !important;
+    background: 
+        radial-gradient(circle 650px at 50% 45%, rgba(52, 168, 83, 0.12) 0%, transparent 70%),
+        radial-gradient(circle 400px at 85% 15%, rgba(66, 133, 244, 0.06) 0%, transparent 60%),
+        #0E1412 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.roi-card {
+    background: #18201C !important;
+    border: 1px solid rgba(52, 168, 83, 0.25) !important;
+    box-shadow: 
+        0 25px 60px -15px rgba(0, 0, 0, 0.85),
+        0 0 35px rgba(52, 168, 83, 0.2) !important;
+}
+
+/* 6. Pricing Section - Obsidian Dark with Pro Halo */
+.pricing-section {
+    padding: 110px 0 !important;
+    background: 
+        radial-gradient(circle 550px at 50% 45%, rgba(66, 133, 244, 0.14) 0%, rgba(251, 188, 5, 0.06) 40%, transparent 75%),
+        #0C0E14 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pricing-card {
+    background: #1E222D !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(66, 133, 244, 0.1) !important;
+    transition: transform 0.35s ease, box-shadow 0.35s ease !important;
+}
+
+.pricing-card.popular {
+    border-color: rgba(66, 133, 244, 0.6) !important;
+    box-shadow: 
+        0 30px 70px -15px rgba(0, 0, 0, 0.9),
+        0 0 45px rgba(66, 133, 244, 0.35),
+        0 0 80px rgba(26, 115, 232, 0.18) !important;
+}
+
+.pricing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 55px -10px rgba(0, 0, 0, 0.85), 0 0 35px rgba(66, 133, 244, 0.3) !important;
+}
+
+/* 7. FAQ Section - Refined Reading Slate */
+.faq-section {
+    padding: 100px 0 !important;
+    background: 
+        radial-gradient(ellipse 65% 50% at 50% 30%, rgba(66, 133, 244, 0.07) 0%, transparent 70%),
+        #111319 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.faq-card {
+    background: #1E222D !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(66, 133, 244, 0.08) !important;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.faq-card.open {
+    border-color: rgba(66, 133, 244, 0.4) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 26px rgba(66, 133, 244, 0.2) !important;
+}
+
+/* 8. CTA Section - Radiant Google Blue Conversion Spotlight */
+.cta-section {
+    padding: 110px 0 !important;
+    background: 
+        radial-gradient(circle 750px at 50% 30%, rgba(66, 133, 244, 0.22) 0%, rgba(14, 19, 34, 0.95) 65%, #0E1322 100%) !important;
+}
+
+.cta-form-container {
+    background: rgba(22, 26, 40, 0.85) !important;
+    border: 1px solid rgba(66, 133, 244, 0.35) !important;
+    box-shadow: 
+        0 30px 70px -15px rgba(0, 0, 0, 0.9),
+        0 0 45px rgba(66, 133, 244, 0.25) !important;
 }
