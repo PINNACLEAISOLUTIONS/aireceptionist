@@ -238,25 +238,27 @@ ul {
 }
 
 .logo-name {
-    font-weight: 800;
-    font-size: 1.35rem;
-    letter-spacing: -0.01em;
+    font-weight: 900;
+    font-size: 1.42rem;
+    letter-spacing: -0.02em;
     color: #FFFFFF;
-    line-height: 1.08;
+    line-height: 1.05;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .logo-tag {
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-size: 0.94rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    background: linear-gradient(90deg, #60A5FA 0%, #A855F7 100%);
+    background: linear-gradient(90deg, #60A5FA 0%, #38BDF8 45%, #C084FC 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-top: 2px;
+    margin-top: 3px;
+    line-height: 1.15;
+    filter: drop-shadow(0 2px 8px rgba(96, 165, 250, 0.45));
     animation: logoShine 4s linear infinite;
 }
 
@@ -2976,15 +2978,17 @@ ul {
         padding: 10px 0 !important;
     }
     .logo-mark svg {
-        width: 28px;
-        height: 28px;
+        width: 32px !important;
+        height: 32px !important;
     }
     .logo-name {
         font-size: 1.15rem !important;
     }
     .logo-tag {
-        font-size: 0.55rem !important;
-        letter-spacing: 2px !important;
+        font-size: 0.82rem !important;
+        letter-spacing: 0.05em !important;
+        font-weight: 800 !important;
+        filter: drop-shadow(0 2px 6px rgba(96, 165, 250, 0.45)) !important;
     }
 
     /* Hero Section Mobile Fixes - Eliminates any Banner Overlap */
@@ -3358,26 +3362,249 @@ ul {
     }
 }
 
-/* ===== HOW IT WORKS STEPS WITH GOOGLE COLORS ===== */
-.step {
-    background: var(--bg-card) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 18px !important;
-    padding: 36px 28px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+/* ===== VIBRANT HOW IT WORKS STEP CARDS (VOLTAGENT / LINEAR / GOOGLE) ===== */
+.steps-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 40px;
 }
-.step:nth-child(1) { border-top: 3px solid var(--google-blue-light) !important; }
-.step:nth-child(1):hover { border-color: var(--google-blue-light) !important; transform: translateY(-6px); box-shadow: 0 16px 30px rgba(66, 133, 244, 0.25) !important; }
-.step:nth-child(1) .step-number { color: var(--google-blue-light) !important; }
 
-.step:nth-child(2) { border-top: 3px solid var(--google-yellow) !important; }
-.step:nth-child(2):hover { border-color: var(--google-yellow) !important; transform: translateY(-6px); box-shadow: 0 16px 30px rgba(251, 188, 5, 0.25) !important; }
-.step:nth-child(2) .step-number { color: var(--google-yellow) !important; }
+.step {
+    flex: 1;
+    min-width: 280px;
+    max-width: 370px;
+    text-align: left;
+    padding: 34px 28px 30px;
+    border-radius: 20px !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-.step:nth-child(3) { border-top: 3px solid var(--google-green) !important; }
-.step:nth-child(3):hover { border-color: var(--google-green) !important; transform: translateY(-6px); box-shadow: 0 16px 30px rgba(52, 168, 83, 0.25) !important; }
-.step:nth-child(3) .step-number { color: var(--google-green) !important; }
+/* Step Badges */
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 20px;
+    z-index: 1;
+    position: relative;
+}
+
+.step-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.step-badge-blue {
+    background: rgba(37, 99, 235, 0.18);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    color: #93C5FD;
+}
+.step-badge-blue .step-badge-dot {
+    background: #60A5FA;
+    box-shadow: 0 0 8px #60A5FA;
+}
+
+.step-badge-green {
+    background: rgba(16, 185, 129, 0.18);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    color: #A7F3D0;
+}
+.step-badge-green .step-badge-dot {
+    background: #34D399;
+    box-shadow: 0 0 8px #34D399;
+}
+
+.step-badge-amber {
+    background: rgba(245, 158, 11, 0.18);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    color: #FDE68A;
+}
+.step-badge-amber .step-badge-dot {
+    background: #FBBF24;
+    box-shadow: 0 0 8px #FBBF24;
+}
+
+/* Step Numbers - Vibrant, glowing chromatic gradient */
+.step-number {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-family: var(--font-display);
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+/* Step 1: Electric Blue */
+.step-1 {
+    background: linear-gradient(170deg, rgba(30, 64, 175, 0.32) 0%, rgba(15, 23, 42, 0.96) 55%, rgba(10, 15, 29, 0.98) 100%) !important;
+    border: 1px solid rgba(96, 165, 250, 0.4) !important;
+    border-top: 3px solid #60A5FA !important;
+    box-shadow: inset 0 1px 0 0 rgba(191, 219, 254, 0.35), 0 14px 34px -8px rgba(37, 99, 235, 0.35) !important;
+}
+.step-1 .step-number {
+    background: linear-gradient(180deg, rgba(96, 165, 250, 0.65) 0%, rgba(37, 99, 235, 0.1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+}
+.step-1 .step-icon {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.28), rgba(59, 130, 246, 0.12));
+    border: 1.5px solid rgba(96, 165, 250, 0.5);
+    color: #93C5FD;
+    box-shadow: 0 0 22px rgba(37, 99, 235, 0.4);
+}
+.step-1:hover {
+    transform: translateY(-8px);
+    border-color: #60A5FA !important;
+    box-shadow: inset 0 1px 0 0 rgba(191, 219, 254, 0.55), 0 22px 48px -6px rgba(37, 99, 235, 0.55), 0 0 30px rgba(96, 165, 250, 0.4) !important;
+}
+.step-1:hover .step-number {
+    transform: scale(1.06);
+    opacity: 0.95;
+}
+
+/* Step 2: Mint / Emerald Green */
+.step-2 {
+    background: linear-gradient(170deg, rgba(5, 150, 105, 0.3) 0%, rgba(15, 23, 42, 0.96) 55%, rgba(10, 15, 29, 0.98) 100%) !important;
+    border: 1px solid rgba(52, 211, 153, 0.4) !important;
+    border-top: 3px solid #34D399 !important;
+    box-shadow: inset 0 1px 0 0 rgba(167, 243, 208, 0.35), 0 14px 34px -8px rgba(16, 185, 129, 0.35) !important;
+}
+.step-2 .step-number {
+    background: linear-gradient(180deg, rgba(52, 211, 153, 0.65) 0%, rgba(16, 185, 129, 0.1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+}
+.step-2 .step-icon {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(52, 211, 153, 0.12));
+    border: 1.5px solid rgba(52, 211, 153, 0.5);
+    color: #A7F3D0;
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.4);
+}
+.step-2:hover {
+    transform: translateY(-8px);
+    border-color: #34D399 !important;
+    box-shadow: inset 0 1px 0 0 rgba(209, 250, 229, 0.55), 0 22px 48px -6px rgba(16, 185, 129, 0.55), 0 0 30px rgba(52, 211, 153, 0.4) !important;
+}
+.step-2:hover .step-number {
+    transform: scale(1.06);
+    opacity: 0.95;
+}
+
+/* Step 3: Amber / Gold */
+.step-3 {
+    background: linear-gradient(170deg, rgba(217, 119, 6, 0.3) 0%, rgba(15, 23, 42, 0.96) 55%, rgba(10, 15, 29, 0.98) 100%) !important;
+    border: 1px solid rgba(251, 191, 36, 0.45) !important;
+    border-top: 3px solid #FBBF24 !important;
+    box-shadow: inset 0 1px 0 0 rgba(254, 243, 199, 0.35), 0 14px 34px -8px rgba(245, 158, 11, 0.35) !important;
+}
+.step-3 .step-number {
+    background: linear-gradient(180deg, rgba(251, 191, 36, 0.7) 0%, rgba(245, 158, 11, 0.1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
+}
+.step-3 .step-icon {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.28), rgba(251, 191, 36, 0.12));
+    border: 1.5px solid rgba(251, 191, 36, 0.5);
+    color: #FDE68A;
+    box-shadow: 0 0 22px rgba(245, 158, 11, 0.4);
+}
+.step-3:hover {
+    transform: translateY(-8px);
+    border-color: #FBBF24 !important;
+    box-shadow: inset 0 1px 0 0 rgba(254, 243, 199, 0.55), 0 22px 48px -6px rgba(245, 158, 11, 0.55), 0 0 30px rgba(251, 191, 36, 0.4) !important;
+}
+.step-3:hover .step-number {
+    transform: scale(1.06);
+    opacity: 0.95;
+}
+
+/* Step Content */
+.step-content {
+    margin-bottom: 24px;
+    z-index: 1;
+    position: relative;
+}
+
+.step-content h3 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+.step-content p {
+    color: #CBD5E1;
+    font-size: 0.94rem;
+    line-height: 1.68;
+}
+
+.step-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    z-index: 1;
+    position: relative;
+}
+
+/* Connectors between steps */
+.step-connector {
+    flex: 0 0 32px;
+    height: 2px;
+    margin-top: 150px;
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0.6), rgba(52, 211, 153, 0.6));
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.4);
+}
+.step-connector:last-of-type {
+    background: linear-gradient(90deg, rgba(52, 211, 153, 0.6), rgba(251, 191, 36, 0.6));
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+@media (max-width: 900px) {
+    .steps-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .step {
+        width: 100%;
+        max-width: 480px;
+    }
+    .step-connector {
+        display: none;
+    }
+}
 
 /* ===== PRICING ENHANCEMENTS ===== */
 .pricing-card {
@@ -3726,4 +3953,68 @@ ul {
 /* Linear.app Design System Specular Sheen (from awesome-design-md) */
 .feature-card, .step, .pricing-card, .roi-card, .sim-controls-panel, .voice-studio-card {
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+/* ===== UNIVERSAL MOBILE HERO STATS CENTERING & BALANCED GRID (FIX FOR CELL PHONES) ===== */
+@media (max-width: 768px) {
+    .hero-stats,
+    .hero-text-col .hero-stats,
+    div.hero-stats {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        width: 100% !important;
+        max-width: 366px !important;
+        margin: 0 auto 28px auto !important;
+        padding: 14px 8px !important;
+        background: rgba(15, 23, 42, 0.82) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        border-radius: 16px !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.14), 0 14px 32px rgba(0, 0, 0, 0.45) !important;
+        order: 7 !important;
+        float: none !important;
+    }
+    .hero-stats .stat,
+    .hero-text-col .hero-stats .stat {
+        text-align: center !important;
+        padding: 0 2px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .hero-stats .stat-divider,
+    .hero-text-col .hero-stats .stat-divider {
+        display: none !important;
+    }
+    .hero-stats .stat-number,
+    .hero-text-col .hero-stats .stat-number {
+        font-size: 1.55rem !important;
+        font-weight: 800 !important;
+        line-height: 1.1 !important;
+        display: inline-block !important;
+        color: #FFFFFF !important;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+    }
+    .hero-stats .stat-suffix,
+    .hero-text-col .hero-stats .stat-suffix {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        display: inline-block !important;
+        color: #94A3B8 !important;
+    }
+    .hero-stats .stat-label,
+    .hero-text-col .hero-stats .stat-label {
+        font-size: 0.64rem !important;
+        white-space: nowrap !important;
+        letter-spacing: 0.04em !important;
+        color: #94A3B8 !important;
+        margin-top: 3px !important;
+        text-transform: uppercase !important;
+        font-weight: 600 !important;
+    }
 }
