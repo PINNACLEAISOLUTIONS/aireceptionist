@@ -4086,3 +4086,218 @@ html, body {
         font-size: 1.4rem;
     }
 }
+
+
+/* ==========================================================================
+   ELEVATED TYPOGRAPHY FOR MOBILE & DESKTOP (PROMINENT STATS, TRUST & HEADINGS)
+   ========================================================================== */
+
+/* 1. Hero Telemetry Stats: Bigger Numbers, High-Contrast Labels, 2x2 Grid on Mobile */
+.hero-stats {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    background: rgba(11, 17, 32, 0.85) !important;
+    border: 1.5px solid rgba(56, 189, 248, 0.28) !important;
+    border-radius: 20px !important;
+    padding: 24px 32px !important;
+    margin-top: 36px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(37, 99, 235, 0.18) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    width: 100% !important;
+    max-width: 980px !important;
+    box-sizing: border-box !important;
+}
+
+.stat {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-number {
+    font-family: var(--font-mono, monospace) !important;
+    font-size: clamp(2rem, 3.8vw, 2.6rem) !important;
+    font-weight: 900 !important;
+    color: #FFFFFF !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.35) !important;
+}
+
+.stat-suffix {
+    font-family: var(--font-mono, monospace) !important;
+    font-size: clamp(1.4rem, 2.8vw, 1.85rem) !important;
+    font-weight: 800 !important;
+    color: #38BDF8 !important;
+    margin-left: 2px;
+}
+
+.stat-label {
+    font-size: clamp(0.85rem, 1.6vw, 0.96rem) !important;
+    font-weight: 700 !important;
+    color: #E2E8F0 !important;
+    margin-top: 6px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap !important;
+}
+
+.stat-divider {
+    width: 1.5px;
+    height: 48px;
+    background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.4) 50%, transparent 100%);
+}
+
+/* 2. Trust Bar: Prominent Heading & Enlarged Dental/Medical Badge Pills */
+.trust-banner {
+    padding: 42px 0 38px 0 !important;
+}
+
+.trust-label {
+    font-family: var(--font-mono, monospace) !important;
+    font-size: clamp(0.88rem, 2vw, 1.05rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: #F1F5F9 !important;
+    margin-bottom: 22px !important;
+    text-align: center !important;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.25) !important;
+}
+
+.trust-badges-row {
+    gap: 14px !important;
+}
+
+.trust-badge-pill {
+    font-size: clamp(0.96rem, 1.8vw, 1.08rem) !important;
+    font-weight: 600 !important;
+    padding: 12px 22px !important;
+    border-radius: 9999px !important;
+    background: rgba(15, 23, 42, 0.85) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+    color: #F8FAFC !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
+    transition: all 0.25s ease !important;
+}
+
+.trust-badge-pill:hover {
+    border-color: rgba(56, 189, 248, 0.6) !important;
+    box-shadow: 0 6px 24px rgba(37, 99, 235, 0.35), 0 0 16px rgba(56, 189, 248, 0.3) !important;
+    transform: translateY(-2px) scale(1.02) !important;
+}
+
+/* 3. Section Titles: Bold & Sizable ("Experience a Live AI Receptionist Call", etc.) */
+.section-tag {
+    font-size: clamp(0.8rem, 1.4vw, 0.92rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.1em !important;
+    padding: 7px 18px !important;
+    margin-bottom: 16px !important;
+}
+
+.section-title {
+    font-family: var(--font-display, 'Outfit', sans-serif) !important;
+    font-size: clamp(2.35rem, 5.2vw, 3.4rem) !important;
+    font-weight: 850 !important;
+    line-height: 1.14 !important;
+    letter-spacing: -0.025em !important;
+    color: #FFFFFF !important;
+    margin-bottom: 16px !important;
+    text-align: center !important;
+}
+
+.section-subtitle {
+    font-size: clamp(1.05rem, 2vw, 1.22rem) !important;
+    line-height: 1.6 !important;
+    color: #CBD5E1 !important;
+    max-width: 780px !important;
+    margin: 0 auto 44px auto !important;
+    text-align: center !important;
+}
+
+/* 4. Mobile Layout Adaptations for Telemetry Stats & Badges */
+@media (max-width: 768px) {
+    .hero-stats {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px 14px !important;
+        padding: 20px 16px !important;
+        border-radius: 18px !important;
+        margin-top: 28px !important;
+    }
+
+    .stat-divider {
+        display: none !important;
+    }
+
+    .stat-number {
+        font-size: 2.2rem !important;
+    }
+
+    .stat-suffix {
+        font-size: 1.6rem !important;
+    }
+
+    .stat-label {
+        font-size: 0.88rem !important;
+        white-space: normal !important;
+        line-height: 1.3 !important;
+    }
+
+    .trust-label {
+        font-size: 0.94rem !important;
+        line-height: 1.5 !important;
+        padding: 0 10px !important;
+    }
+
+    .trust-badges-row {
+        gap: 10px !important;
+    }
+
+    .trust-badge-pill {
+        font-size: 0.98rem !important;
+        padding: 10px 16px !important;
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+
+    .section-title {
+        font-size: clamp(2.15rem, 7.6vw, 2.75rem) !important;
+        line-height: 1.16 !important;
+        padding: 0 8px !important;
+    }
+
+    .section-subtitle {
+        font-size: 1.05rem !important;
+        padding: 0 8px !important;
+        margin-bottom: 32px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.08rem !important;
+        line-height: 1.62 !important;
+    }
+}
+
+
+.stat-divider {
+    display: none !important;
+}
+
+.hero-stats .stat:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 768px) {
+    .hero-stats .stat:not(:last-child) {
+        border-right: none !important;
+    }
+}
