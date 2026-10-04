@@ -127,13 +127,22 @@ function initRileyPlayer() {
     audio.addEventListener('loadedmetadata', () => { if (timeEl && isFinite(audio.duration)) timeEl.textContent = fmt(audio.duration); });
     audio.addEventListener('timeupdate', () => { if (timeEl) timeEl.textContent = fmt(audio.currentTime); });
     audio.addEventListener('ended', () => { setState(false); audio.currentTime = 0; if (isFinite(audio.duration) && timeEl) timeEl.textContent = fmt(audio.duration); });
-    audio.addEventListener('error', () => setState(false));
+    const statusEl = document.getElementById('rileyStatus');
+    const showStatus = html => { if (!statusEl) return; statusEl.hidden = !html; statusEl.innerHTML = html || ''; };
+    const fail = () => {
+        setState(false);
+        showStatus('Audio could not play on this device. <a href="assets/riley-amber-example.mp3" target="_blank" rel="noopener">Open the recording directly</a>.');
+    };
+    audio.addEventListener('error', fail);
+    audio.addEventListener('waiting', () => { if (!audio.paused) showStatus('Loading audio...'); });
+    audio.addEventListener('playing', () => { setState(true); showStatus(''); });
+    audio.addEventListener('pause', () => setState(false));
     btn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play().then(() => setState(true)).catch(() => setState(false));
-        } else {
-            audio.pause(); setState(false);
-        }
+        if (!audio.paused) { audio.pause(); return; }
+        setState(true);              // react to the tap immediately, even while the file loads
+        showStatus('Loading audio...');
+        const p = audio.play();
+        if (p && typeof p.catch === 'function') p.catch(fail);
     });
 }
 
