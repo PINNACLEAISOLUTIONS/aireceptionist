@@ -46,3 +46,17 @@
 a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
     outline: 2px solid #5EF2C0; outline-offset: 3px;
 }
+
+/* 7. Hero label: a clean "live" badge instead of a thin rule and slash. */
+.hero-service-label {
+    display: inline-flex; align-items: center; gap: 10px; margin: 0 0 24px; padding: 8px 18px 8px 14px;
+    border-radius: 999px; background: rgba(0,217,146,.08); border: 1px solid rgba(94,242,192,.34);
+    color: #D8F5EA; font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; line-height: 1.2;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 10px 26px -14px rgba(0,217,146,.55);
+}
+.hero-service-label::before { content: none; }
+.hero-service-label strong { color: #fff; font-weight: 700; letter-spacing: .12em; }
+.live-dot { width: 8px; height: 8px; flex: none; border-radius: 50%; background: #00D992; animation: livePulse 2.2s ease-out infinite; }
+@keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(0,217,146,.55); } 70%, 100% { box-shadow: 0 0 0 9px rgba(0,217,146,0); } }
+@media (max-width: 600px) { .hero-service-label { font-size: .74rem; letter-spacing: .1em; padding: 7px 14px 7px 12px; } }
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; box-shadow: 0 0 0 4px rgba(0,217,146,.2); } }
