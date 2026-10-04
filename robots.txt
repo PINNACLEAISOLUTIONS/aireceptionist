@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pinnacleaisolutions.github.io/aireceptionist/sitemap.xml
+Sitemap: https://pinnacleaiphoneagent.us/sitemap.xml
