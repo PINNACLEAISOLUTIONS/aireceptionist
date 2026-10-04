@@ -5,6 +5,9 @@
  --font-mono:var(--font-primary);
 }
 body { font-family:var(--font-primary); font-weight:400; font-synthesis:none; }
+.hero-service-label { display:flex; align-items:center; gap:12px; margin:0 0 24px; color:#c4ced3; font-size:.875rem; font-weight:500; line-height:1.5; letter-spacing:.015em; }
+.hero-service-label::before { content:""; width:24px; height:1px; background:#899ba4; }
+.hero-service-label>span { color:#768891; }
 h1,h2,h3,h4,button,input,select,textarea { font-family:var(--font-primary) !important; }
 .hero-h1 {
  font-size:clamp(2.5rem,4.8vw,4.5rem); font-weight:550; line-height:1.08;
