@@ -1,0 +1,48 @@
+/* ===== POLISH LAYER (loaded last) =====
+   Fixes layout regressions from the redesign and tightens details. Delete this file and its <link> to undo. */
+
+/* 1. "Every missed call" list: headings had been squeezed into a 32px icon column. One column, rose rail. */
+#problem .card-grid { gap: 30px; }
+#problem .fcard, #problem .fcard:first-child, #problem .fcard:last-child {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 4px 0 4px 24px;
+    border: 0; border-left: 2px solid rgba(255,106,133,.6);
+    background: none; box-shadow: none;
+}
+#problem .fcard h3 { font-size: 1.3rem; line-height: 1.25; margin: 0; }
+#problem .fcard h3, #problem .fcard p { grid-column: 1; }
+#problem .fcard p { margin: 0; max-width: 46ch; color: #D3D9E3; }
+#problem .fcard:hover { border-left-color: rgb(255,106,133); }
+
+/* 2. "Three steps": side padding was stripped, so text touched the border. */
+#how-it-works .step { padding: 30px 26px 28px !important; border-radius: 18px !important; }
+
+/* 3. Contact form: icons sit inside the fields; left column stays with the form while scrolling. */
+.form-group { position: relative; }
+.form-group > .form-icon {
+    position: absolute; left: 16px; top: 26px; transform: translateY(-50%);
+    width: 18px; height: 18px; color: #8793A5; z-index: 1; pointer-events: none; transition: color .2s;
+}
+.form-group:has(> .form-icon) .form-input { padding-left: 46px !important; }
+.form-group:focus-within > .form-icon { color: #00D992; }
+@media (min-width: 900px) {
+    .cta-content { align-self: start; position: sticky; top: calc(var(--header-h, 76px) + 24px); }
+}
+
+/* 4. Phones: hero reassurance chips wrap compactly instead of three full-width bars. */
+@media (max-width: 600px) {
+    .hero-trust { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+    .hero-trust li { width: auto; }
+}
+
+/* 5. Readability: nothing under 12px; comfortable tap areas for inline phone links and the billing switch. */
+.art-caption, .availability-art > div > span, .booking-path > span { font-size: 12px; }
+.hero-demo-note a, .cta-subtitle a, .contact-note a { padding: 12px 2px; margin: -12px -2px; }  /* bigger tap area, no layout change */
+.direct-call-link { display: inline-flex; align-items: center; min-height: 44px; }
+.toggle-switch { position: relative; }
+.toggle-switch::after { content: ""; position: absolute; inset: -8px -4px; }
+
+/* 6. Keyboard focus is always visible. */
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #5EF2C0; outline-offset: 3px;
+}
