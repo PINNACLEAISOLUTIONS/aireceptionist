@@ -100,8 +100,7 @@ window.addEventListener('load', () => {
 // ===== DEVELOPER-QUALITY INTERACTIVE MODULES =====
 
 document.addEventListener('DOMContentLoaded', () => {
-    initVoiceStudio();
-    initCallSimulator();
+    initRileyPlayer();
     initRoiCalculator();
     initPricingToggle();
     initFaqAccordion();
@@ -112,204 +111,30 @@ document.addEventListener('DOMContentLoaded', () => {
     initCtaTracking();
 });
 
-// 1. VOICE STUDIO MODULE
-const voiceScenarios = {
-    clinic: {
-        title: "Riley: Healthcare & Pediatric Receptionist",
-        desc: "A conversational voice set up for clinic scheduling and caller intake.",
-        transcript: "Thank you for calling High Springs Pediatrics and Primary Care. My name is Riley. How can I assist you today?",
-        badge: "Sample voice",
-        audioSrc: "assets/riley-clinic.mp3"
-    },
-    hvac: {
-        title: "Marcus: Home Services & Dispatch",
-        desc: "A clear, efficient voice for after-hours service calls.",
-        transcript: "Apex Emergency Services, Marcus speaking. We have an on-call technician available in your area right now. Is water actively leaking, or is your AC or heating down?",
-        badge: "Sample voice",
-        audioSrc: "assets/marcus-hvac.mp3"
-    },
-    legal: {
-        title: "Elena: Legal Intake Concierge",
-        desc: "A professional voice for confidential legal intake.",
-        transcript: "Harrison and Partners Law Group, Elena speaking. I can schedule your confidential consultation with attorney David. May I please take your name and a brief description of your matter?",
-        badge: "Sample voice",
-        audioSrc: "assets/elena-legal.mp3"
-    }
-};
-
-function initVoiceStudio() {
-    const tabs = document.querySelectorAll('.voice-tab');
-    const playBtn = document.getElementById('voicePlayBtn');
-    const playerBox = document.getElementById('voicePlayerBox');
-    const titleElem = document.getElementById('voiceTitle');
-    const descElem = document.getElementById('voiceDesc');
-    const transcriptElem = document.getElementById('voiceTranscript');
-    const badgeElem = document.getElementById('voiceBadge');
-    
-    if (!playBtn || !tabs.length) return;
-
-    let currentScenario = 'clinic';
-    let isPlaying = false;
-    let currentAudio = null;
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            currentScenario = tab.dataset.scenario;
-            
-            const data = voiceScenarios[currentScenario];
-            if (data) {
-                if (titleElem) titleElem.textContent = data.title;
-                if (descElem) descElem.textContent = data.desc;
-                if (transcriptElem) transcriptElem.textContent = `"${data.transcript}"`;
-                if (badgeElem) badgeElem.textContent = data.badge;
-            }
-            stopVoice();
-        });
-    });
-
-    playBtn.addEventListener('click', () => {
-        if (isPlaying) {
-            stopVoice();
+// 1. RILEY EXAMPLE-VOICE PLAYER (recorded audio of the High Springs Pediatrics assistant; lazy-loaded on first play)
+function initRileyPlayer() {
+    const btn = document.getElementById('rileyPlay');
+    const audio = document.getElementById('rileyAudio');
+    const box = document.getElementById('rileyPlayer');
+    const timeEl = document.getElementById('rileyTime');
+    if (!btn || !audio || !box) return;
+    const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+    const setState = playing => {
+        box.classList.toggle('playing', playing);
+        btn.setAttribute('aria-pressed', String(playing));
+        btn.setAttribute('aria-label', playing ? "Pause example of Riley's voice" : "Play example of Riley's voice");
+    };
+    audio.addEventListener('loadedmetadata', () => { if (timeEl && isFinite(audio.duration)) timeEl.textContent = fmt(audio.duration); });
+    audio.addEventListener('timeupdate', () => { if (timeEl) timeEl.textContent = fmt(audio.currentTime); });
+    audio.addEventListener('ended', () => { setState(false); audio.currentTime = 0; if (isFinite(audio.duration) && timeEl) timeEl.textContent = fmt(audio.duration); });
+    audio.addEventListener('error', () => setState(false));
+    btn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play().then(() => setState(true)).catch(() => setState(false));
         } else {
-            playVoice();
+            audio.pause(); setState(false);
         }
     });
-
-    function playVoice() {
-        stopVoice();
-        isPlaying = true;
-        playerBox.classList.add('playing');
-        playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-        
-        const data = voiceScenarios[currentScenario];
-        if (data && data.audioSrc) {
-            currentAudio = new Audio(data.audioSrc);
-            currentAudio.play().then(() => {
-                currentAudio.onended = () => stopVoice();
-                currentAudio.onerror = () => fallbackSpeech(data.transcript);
-            }).catch(() => {
-                fallbackSpeech(data.transcript);
-            });
-        } else {
-            fallbackSpeech(data.transcript);
-        }
-    }
-
-    function fallbackSpeech(text) {
-        if (window.speechSynthesis) {
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.onend = () => stopVoice();
-            u.onerror = () => stopVoice();
-            window.speechSynthesis.speak(u);
-        } else {
-            setTimeout(stopVoice, 4000);
-        }
-    }
-
-    function stopVoice() {
-        isPlaying = false;
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-            currentAudio = null;
-        }
-        if (window.speechSynthesis) {
-            window.speechSynthesis.cancel();
-        }
-        if (playerBox) playerBox.classList.remove('playing');
-        if (playBtn) playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-    }
-}
-
-// 2. LIVE CALL SIMULATOR MODULE
-const callScripts = {
-    dental: [
-        { sender: 'caller', text: "Hi, I have a cracked tooth and severe pain. Do you have any emergency openings today?" },
-        { sender: 'ai', text: "I'm so sorry you're in pain! We have an emergency reservation open at 2:30 PM today with Dr. Miller. Shall I lock that in for you?" },
-        { sender: 'caller', text: "Yes please, my name is Alex Reed and my number is (555) 234-5678." },
-        { sender: 'ai', text: "All set, Alex! You are booked for 2:30 PM today. A confirmation SMS with directions was just sent to your phone." }
-    ],
-    hvac: [
-        { sender: 'caller', text: "Hello, our air conditioning stopped working and our house is 86 degrees. Can someone come out?" },
-        { sender: 'ai', text: "We can help right away. We have an on-call HVAC specialist in your area with arrival between 4:00 PM and 5:00 PM today. Would that work?" },
-        { sender: 'caller', text: "That would be a lifesaver. Yes, address is 482 Maple Lane." },
-        { sender: 'ai', text: "Got it! Tech Carlos is dispatched to 482 Maple Lane for 4:00 PM. You'll receive live GPS tracking via text." }
-    ],
-    legal: [
-        { sender: 'caller', text: "Hi, I need to speak to an attorney about a commercial lease dispute." },
-        { sender: 'ai', text: "I can assist with that. Our senior partner conducts 15-minute preliminary strategy reviews every Tuesday and Thursday. Would Thursday at 10 AM suit you?" },
-        { sender: 'caller', text: "Thursday at 10 AM works great." },
-        { sender: 'ai', text: "Perfect. I've reserved Thursday at 10:00 AM on the partner's calendar and emailed you the client portal link." }
-    ]
-};
-
-function initCallSimulator() {
-    const triggerBtn = document.getElementById('triggerSimCall');
-    const scrollContainer = document.getElementById('phoneChatScroll');
-    const timerElem = document.getElementById('simCallTimer');
-    const scenarioBtns = document.querySelectorAll('.scenario-btn');
-    const successBadge = document.getElementById('simSuccessBadge');
-    
-    if (!triggerBtn || !scrollContainer) return;
-
-    let selectedScenario = 'dental';
-    let timerInterval = null;
-    let currentStep = 0;
-
-    scenarioBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            scenarioBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-            btn.classList.add('active');
-            btn.setAttribute('aria-pressed', 'true');
-            selectedScenario = btn.dataset.scenario;
-            resetCall();
-        });
-    });
-
-    triggerBtn.addEventListener('click', () => {
-        startSimulation();
-    });
-
-    function resetCall() {
-        clearInterval(timerInterval);
-        if (timerElem) timerElem.textContent = "00:00";
-        if (successBadge) successBadge.style.display = "none";
-        scrollContainer.innerHTML = '<div class="sim-msg ai">Sample call ready. Press "Play sample call" to see how a conversation unfolds.</div>';
-    }
-
-    function startSimulation() {
-        resetCall();
-        let seconds = 0;
-        timerInterval = setInterval(() => {
-            seconds++;
-            const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
-            const secs = String(seconds % 60).padStart(2, '0');
-            if (timerElem) timerElem.textContent = `${mins}:${secs}`;
-        }, 1000);
-
-        scrollContainer.innerHTML = '';
-        const script = callScripts[selectedScenario];
-        let delay = 300;
-
-        script.forEach((msg, idx) => {
-            setTimeout(() => {
-                const msgElem = document.createElement('div');
-                msgElem.className = `sim-msg ${msg.sender}`;
-                msgElem.textContent = msg.text;
-                scrollContainer.appendChild(msgElem);
-                scrollContainer.scrollTop = scrollContainer.scrollHeight;
-
-                if (idx === script.length - 1) {
-                    if (successBadge) successBadge.style.display = "inline-flex";
-                    setTimeout(() => clearInterval(timerInterval), 3000);
-                }
-            }, delay);
-            delay += (idx % 2 === 0 ? 1800 : 2200);
-        });
-    }
 }
 
 // 3. DYNAMIC ROI CALCULATOR MODULE

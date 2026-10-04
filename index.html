@@ -283,8 +283,7 @@
         <section class="sec" id="problem">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">The problem</span>
-                    <h2 class="section-title">Every missed call is a customer calling someone else</h2>
+                                        <h2 class="section-title">Every missed call is a customer calling someone else</h2>
                     <p class="section-subtitle">Busy hands, lunch breaks, after-hours and a full waiting room all end the same way: the call goes to voicemail.</p>
                 </div>
                 <div class="card-grid grid-3">
@@ -311,8 +310,7 @@
         <section class="sec sec-alt" id="solution">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">The solution</span>
-                    <h2 class="section-title">An AI receptionist that picks up every time</h2>
+                                        <h2 class="section-title">An AI receptionist that picks up every time</h2>
                     <p class="section-subtitle">Pinnacle AI answers in a natural voice, handles the conversation, and hands you a clean summary.</p>
                 </div>
                 <div class="card-grid grid-3 flow-line">
@@ -353,109 +351,32 @@
                     <div class="demo-call-body">
                         <p class="demo-label">Live demo: High Springs Pediatrics AI receptionist (Riley)</p>
                         <a class="demo-number" href="tel:+19045129821" aria-label="Call the demo line at 904-512-9821">(904) 512-9821</a>
-                        <p class="demo-help">Ask to book an appointment, ask about office hours, or try interrupting. It answers 24/7.</p>
+                        <p class="demo-help">Ask about booking an appointment or the clinic's office hours. It is a demo line for a pediatric clinic.</p>
                     </div>
                     <a href="tel:+19045129821" class="btn btn-primary btn-large demo-btn" data-cta="demo-call">
                         <svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg><span>Call the AI Now</span>
                     </a>
-                </div>
 
-                <div class="sim-intro reveal">
-                    <h3>Prefer to read first? Play a sample call</h3>
-                    <p>These sample conversations are scripted illustrations of how the AI handles different businesses.</p>
-                </div>
-
-                <div class="sim-layout">
-                    <div class="sim-controls-panel">
-                        <div class="scenario-selector" role="group" aria-label="Choose a sample call">
-                            <button class="scenario-btn active" data-scenario="dental" aria-pressed="true">
-                                <div>
-                                    <div class="scenario-title">Dental practice emergency</div>
-                                    <div class="scenario-desc">Cracked tooth triage and same-day booking</div>
-                                </div>
-                                <span class="scenario-tag">Healthcare</span>
-                            </button>
-                            <button class="scenario-btn" data-scenario="hvac" aria-pressed="false">
-                                <div>
-                                    <div class="scenario-title">After-hours HVAC dispatch</div>
-                                    <div class="scenario-desc">A/C breakdown and technician dispatch</div>
-                                </div>
-                                <span class="scenario-tag">Home Services</span>
-                            </button>
-                            <button class="scenario-btn" data-scenario="legal" aria-pressed="false">
-                                <div>
-                                    <div class="scenario-title">Legal intake screening</div>
-                                    <div class="scenario-desc">Confidential screening and consultation booking</div>
-                                </div>
-                                <span class="scenario-tag">Professional</span>
-                            </button>
-                        </div>
-
-                        <button class="btn-trigger-call" id="triggerSimCall" type="button">
-                            <svg width="20" height="20" aria-hidden="true"><use href="#i-phone"/></svg>
-                            <span>Play sample call</span>
+                    <div class="riley-player" id="rileyPlayer">
+                        <button class="riley-btn" id="rileyPlay" type="button" aria-label="Play example of Riley's voice" aria-pressed="false">
+                            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+                            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
                         </button>
-                    </div>
-
-                    <div class="phone-device">
-                        <div class="phone-inner">
-                            <div class="phone-top-bar">
-                                <div class="phone-status">
-                                    <span class="status-dot"></span>
-                                    <span>Pinnacle AI sample call</span>
-                                </div>
-                                <span class="call-timer" id="simCallTimer">00:00</span>
-                            </div>
-                            <div class="phone-chat-scroll" id="phoneChatScroll" aria-live="polite">
-                                <div class="sim-msg ai">Sample call ready. Press "Play sample call" to see how a conversation unfolds.</div>
-                            </div>
-                            <div class="sim-success-badge" id="simSuccessBadge">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                                <span>Appointment confirmed and SMS sent</span>
-                            </div>
+                        <div class="riley-meta">
+                            <strong>Hear Riley</strong>
+                            <span>Example audio of the High Springs Pediatrics AI voice. This is a recording, not a live call.</span>
+                            <div class="riley-bar"><span class="wave big" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="riley-time" id="rileyTime">0:18</span></div>
                         </div>
+                        <audio id="rileyAudio" preload="none" src="assets/riley-amber-example.mp3"></audio>
                     </div>
+                    <details class="riley-transcript">
+                        <summary>Read the transcript</summary>
+                        <p><strong>Riley:</strong> Thanks for calling High Springs Pediatrics. My name is Riley. How can I help you?</p>
+                        <p><strong>Riley:</strong> Of course, I'd be happy to help with that. Is this visit for a new patient, or someone we already see?</p>
+                        <p><strong>Riley:</strong> Perfect. What day works best for you, and I'll check what we have open.</p>
+                    </details>
                 </div>
 
-                <details class="more reveal" id="voice-studio">
-                    <summary>Listen to sample AI voices</summary>
-                    <div class="voice-studio-card">
-                        <div class="voice-tabs" role="group" aria-label="Choose a voice">
-                            <button class="voice-tab active" data-scenario="clinic" type="button"><span>Riley: healthcare</span></button>
-                            <button class="voice-tab" data-scenario="hvac" type="button"><span>Marcus: home services</span></button>
-                            <button class="voice-tab" data-scenario="legal" type="button"><span>Elena: legal intake</span></button>
-                        </div>
-
-                        <div class="voice-player-main" id="voicePlayerBox">
-                            <button class="play-btn-large" id="voicePlayBtn" type="button" aria-label="Play voice preview">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            </button>
-                            <div class="audio-meta">
-                                <h4 id="voiceTitle">Riley: Healthcare &amp; Pediatric Receptionist</h4>
-                                <p id="voiceDesc">A conversational voice set up for clinic scheduling and caller intake.</p>
-                                <div class="waveform-container" aria-hidden="true">
-                                    <div class="wave-bar" style="animation-delay: 0.1s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.3s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.2s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.4s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.15s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.35s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.25s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.5s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.1s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.45s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.2s"></div>
-                                    <div class="wave-bar" style="animation-delay: 0.3s"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="voice-transcript-box">
-                            <span class="transcript-badge" id="voiceBadge">Sample voice</span>
-                            <span id="voiceTranscript">"Thank you for calling High Springs Pediatrics and Primary Care. My name is Riley. How can I assist you today?"</span>
-                        </div>
-                    </div>
-                </details>
             </div>
         </section>
 
@@ -463,8 +384,7 @@
         <section class="how-it-works sec sec-alt" id="how-it-works">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">How it works</span>
-                    <h2 class="section-title">Up and running in three steps</h2>
+                                        <h2 class="section-title">Up and running in three steps</h2>
                     <p class="section-subtitle">No new hardware and no new number. Your existing phone line stays yours.</p>
                 </div>
 
@@ -506,8 +426,7 @@
         <section class="features sec" id="features">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">Features</span>
-                    <h2 class="section-title">Everything you need to turn missed calls into customers</h2>
+                                        <h2 class="section-title">Everything you need to turn missed calls into customers</h2>
                     <p class="section-subtitle">One AI receptionist that covers the calls your team can't.</p>
                 </div>
 
@@ -617,8 +536,7 @@
         <section class="industries sec sec-alt" id="industries">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">Use cases</span>
-                    <h2 class="section-title">Built for businesses that live on the phone</h2>
+                                        <h2 class="section-title">Built for businesses that live on the phone</h2>
                     <p class="section-subtitle">Booking and intake flows set up for the way your industry works.</p>
                 </div>
 
@@ -723,8 +641,7 @@
         <section class="sec sec-alt" id="integrations">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">Integrations</span>
-                    <h2 class="section-title">Works with the tools you already use</h2>
+                                        <h2 class="section-title">Works with the tools you already use</h2>
                     <p class="section-subtitle">Connect your calendar and systems so bookings and leads land where your team already works.</p>
                 </div>
                 <div class="card-grid grid-3">
@@ -850,8 +767,7 @@
         <section class="sec sec-alt" id="trust">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">What you can count on</span>
-                    <h2 class="section-title">Built to look after every caller</h2>
+                                        <h2 class="section-title">Built to look after every caller</h2>
                     <p class="section-subtitle">The essentials a small business needs from a phone answering service.</p>
                 </div>
                 <div class="card-grid grid-3">
@@ -875,8 +791,7 @@
         <section class="faq-section sec" id="faq">
             <div class="container">
                 <div class="section-header reveal">
-                    <span class="section-tag">FAQ</span>
-                    <h2 class="section-title">Questions? Answers.</h2>
+                                        <h2 class="section-title">Questions? Answers.</h2>
                     <p class="section-subtitle">What business owners ask before getting started.</p>
                 </div>
 
