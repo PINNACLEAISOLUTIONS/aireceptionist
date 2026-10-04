@@ -1,4 +1,4 @@
-﻿---
+---
 version: 2.0.0
 name: pinnacle-ai-receptionist-voltron-mtp
 description: Design system and conversion architecture for Pinnacle AI Receptionist, synthesized from the Voltron MTP Professional Website Framework (VoltAgent-inspired developer-grade design). Built on an unrelenting near-black canvas (#0B0C0E), elevated obsidian panels (#14161C, #1A1D25), electric emerald conversion accents (#00D992), technical cyan and amber telemetry indicators, SF Mono/JetBrains Mono data chips, and hairline borders.
@@ -41,19 +41,19 @@ colors:
 
 typography:
   font-primary: "'Inter', system-ui, -apple-system, sans-serif"
-  font-display: "'Outfit', 'Inter', system-ui, sans-serif"
+  font-display: "'Inter', system-ui, sans-serif"
   font-mono: "'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace"
 
   display-hero:
-    fontFamily: "'Outfit', sans-serif"
+    fontFamily: "'Inter', sans-serif"
     fontSize: "clamp(2.5rem, 6.4vw, 4.75rem)"
-    fontWeight: 800
+    fontWeight: 550
     lineHeight: 1.06
     letterSpacing: "-0.035em"
   h2-section:
-    fontFamily: "'Outfit', sans-serif"
+    fontFamily: "'Inter', sans-serif"
     fontSize: "clamp(2rem, 4.2vw, 2.85rem)"
-    fontWeight: 700
+    fontWeight: 550
     lineHeight: 1.18
     letterSpacing: "-0.025em"
   h3-card:
@@ -134,3 +134,5 @@ conversion_rules:
   - "Concrete Telemetry Over Fluff: Explicitly state latency (<140ms), uptime (99.98%), and average saved payroll (,500/mo) in high-contrast monospace chips."
   - "Continuous Dark Canvas: Ground all modules on deep #0B0C0E background broken only by hairline outlines and electric green conversion anchors."
 ---
+## Typography refinement (October 2026)
+Single Inter variable family (400–700); medium 550 headings, 400 body, 600 buttons. Sentence-case hero and CTA, no uppercase transformation on actions. Headings use −0.03em tracking, body uses 1.7 line height and 45–65ch measure. Typography overrides live in typography.css.
