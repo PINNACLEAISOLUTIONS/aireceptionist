@@ -1,4 +1,18 @@
 /* Content-led compositions and a changing, layered dark palette. */
+#hero.hero-v2 {
+ isolation:isolate;
+ background:radial-gradient(ellipse at 78% 38%,rgba(135,155,162,.17),transparent 48%),
+ radial-gradient(ellipse at 64% 95%,rgba(156,129,95,.09),transparent 52%),
+ linear-gradient(155deg,#1b2328 0%,#11171b 48%,#0c1115 100%);
+}
+#hero>.bg-orb,#hero>.bg-grid,#hero .hero-v2-copy::before { display:none; }
+#hero::before {
+ content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+ background:repeating-linear-gradient(118deg,transparent 0,transparent 155px,rgba(207,224,229,.035) 156px,transparent 157px,transparent 310px);
+ mask-image:linear-gradient(90deg,transparent 25%,#000 80%);
+}
+#hero .hero-v2-grid { position:relative; z-index:2; }
+#hero .showcase-glow-back { background:radial-gradient(closest-side,rgba(167,184,183,.14),transparent 75%); }
 .sec { isolation: isolate; }
 #problem { background: radial-gradient(ellipse at 0 20%, #17302b 0, transparent 58%), linear-gradient(145deg,#101a19,#101216 70%) !important; }
 #solution { background: radial-gradient(ellipse at 85% 30%,#123f37 0,transparent 65%),linear-gradient(125deg,#0f1718,#102621) !important; }
