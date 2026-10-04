@@ -1,23 +1,3 @@
-
-function initCardTilt() {
-    const cards = document.querySelectorAll('.bento-card, .pricing-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -4;
-            const rotateY = ((x - centerX) / centerX) * 4;
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-        });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-}
-
 // ===== PINNACLE AI RECEPTIONIST - JAVASCRIPT =====
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -26,14 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all modules
     initNavbar();
     initMobileMenu();
-    initScrollAnimations();
-    initStatCounters();
-    initSmoothScroll();
-    // initFormHandler consolidated into initContactForm
-    if (!prefersReducedMotion) {
-        initCardTilt();
-        initParticleFields();
-    }
 });
 
 // ===== NAVBAR =====
@@ -74,124 +46,6 @@ function initMobileMenu() {
             toggle.classList.remove('active');
             navLinks.classList.remove('active');
             toggle.setAttribute('aria-expanded', 'false');
-        });
-    });
-}
-
-// ===== SCROLL ANIMATIONS ("WINDOWS BOXES" & CARDS) =====
-function initScrollAnimations() {
-    const boxSelectors = [
-        '.bento-card',
-        '.voice-studio-card',
-        '.sim-controls-panel',
-        '.phone-device',
-        '.roi-box',
-        '.step',
-        '.industry-card',
-        '.benefits-content',
-        '.benefits-visual',
-        '.benefit-item',
-        '.pricing-card',
-        '.faq-item',
-        '.cta-form-container'
-    ];
-
-    const elementsToObserve = [];
-    boxSelectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(el => {
-            el.classList.add('scroll-reveal-box');
-            elementsToObserve.push(el);
-        });
-    });
-
-    if ('IntersectionObserver' in window) {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px 0px -40px 0px',
-            threshold: 0.08
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    el.classList.add('is-revealed');
-                    el.classList.add('visible');
-                    observer.unobserve(el);
-                }
-            });
-        }, observerOptions);
-
-        elementsToObserve.forEach(el => observer.observe(el));
-    } else {
-        elementsToObserve.forEach(el => {
-            el.classList.add('is-revealed');
-            el.classList.add('visible');
-        });
-    }
-}
-
-// ===== STAT COUNTERS =====
-function initStatCounters() {
-    const stats = document.querySelectorAll('.stat-number[data-count]');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.5
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    stats.forEach(stat => observer.observe(stat));
-}
-
-function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-count'));
-    const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
-
-    const updateCounter = () => {
-        current += step;
-        if (current < target) {
-            element.textContent = Math.floor(current);
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target;
-        }
-    };
-
-    updateCounter();
-}
-
-// ===== SMOOTH SCROLL =====
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-
-            if (targetId === '#') return;
-
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const headerOffset = 80;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
         });
     });
 }
@@ -237,78 +91,6 @@ function typeWriter(element, text, speed = 50) {
     type();
 }
 
-// ===== PARTICLE FIELD BACKGROUNDS (per-section, canvas, no library) =====
-function initParticleFields() {
-    document.querySelectorAll('canvas.particles-bg').forEach(canvas => {
-        setupParticleField(canvas, canvas.dataset.color || '232, 168, 60');
-    });
-}
-
-function setupParticleField(canvas, color) {
-    const ctx = canvas.getContext('2d');
-    let width, height, particles, running = false, raf;
-
-    function resize() {
-        const rect = canvas.parentElement.getBoundingClientRect();
-        width = canvas.width = rect.width;
-        height = canvas.height = rect.height;
-        const count = Math.max(16, Math.min(60, Math.floor((width * height) / 28000)));
-        particles = Array.from({ length: count }, () => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.25,
-            vy: (Math.random() - 0.5) * 0.25,
-            r: Math.random() * 1.4 + 0.6
-        }));
-    }
-
-    function tick() {
-        if (!running) { raf = null; return; }
-        ctx.clearRect(0, 0, width, height);
-
-        particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x <= 0 || p.x >= width) p.vx *= -1;
-            if (p.y <= 0 || p.y >= height) p.vy *= -1;
-        });
-
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const a = particles[i], b = particles[j];
-                const dist = Math.hypot(a.x - b.x, a.y - b.y);
-                if (dist < 130) {
-                    ctx.strokeStyle = `rgba(${color}, ${0.15 * (1 - dist / 130)})`;
-                    ctx.beginPath();
-                    ctx.moveTo(a.x, a.y);
-                    ctx.lineTo(b.x, b.y);
-                    ctx.stroke();
-                }
-            }
-        }
-
-        particles.forEach(p => {
-            ctx.fillStyle = `rgba(${color}, 0.6)`;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
-        });
-
-        raf = requestAnimationFrame(tick);
-    }
-
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Only animate while the section is actually visible (perf: 6 canvases on one page)
-    new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            running = entry.isIntersecting;
-            if (running && !raf) tick();
-        });
-    }, { threshold: 0 }).observe(canvas);
-}
-
 // ===== Add class to body when page is loaded =====
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
@@ -318,281 +100,121 @@ window.addEventListener('load', () => {
 // ===== DEVELOPER-QUALITY INTERACTIVE MODULES =====
 
 document.addEventListener('DOMContentLoaded', () => {
-    initVoiceStudio();
-    initCallSimulator();
+    initRileyPlayer();
     initRoiCalculator();
     initPricingToggle();
     initFaqAccordion();
     initContactForm();
     initModalHandlers();
-    initScrollRevealObserver();
+    initReveal();
+    initStickyCta();
+    initCtaTracking();
 });
 
-// 1. VOICE STUDIO MODULE
-const voiceScenarios = {
-    clinic: {
-        title: "Riley — Healthcare & Pediatric Receptionist",
-        desc: "Ultra-expressive Vapi voice AI trained on real pediatric clinic triage, scheduling, and caller intake protocols.",
-        transcript: "Thank you for calling High Springs Pediatrics and Primary Care. My name is Riley. How can I assist you today?",
-        badge: "Live Vapi Voice",
-        audioSrc: "assets/riley-clinic.mp3"
-    },
-    hvac: {
-        title: "Marcus — Home Services & Emergency Dispatch",
-        desc: "Urgent, efficient dispatch personality with instant location lookup.",
-        transcript: "Apex Emergency Services, Marcus speaking. We have an on-call technician available in your area right now. Is water actively leaking, or is your AC or heating down?",
-        badge: "Field Dispatch",
-        audioSrc: "assets/marcus-hvac.mp3"
-    },
-    legal: {
-        title: "Elena — Corporate & Legal Intake Concierge",
-        desc: "Professional, confidential screening calibrated for law firms.",
-        transcript: "Harrison and Partners Law Group, Elena speaking. I can schedule your confidential consultation with attorney David. May I please take your name and a brief description of your matter?",
-        badge: "Legal Intake",
-        audioSrc: "assets/elena-legal.mp3"
-    }
-};
-
-function initVoiceStudio() {
-    const tabs = document.querySelectorAll('.voice-tab');
-    const playBtn = document.getElementById('voicePlayBtn');
-    const playerBox = document.getElementById('voicePlayerBox');
-    const titleElem = document.getElementById('voiceTitle');
-    const descElem = document.getElementById('voiceDesc');
-    const transcriptElem = document.getElementById('voiceTranscript');
-    const badgeElem = document.getElementById('voiceBadge');
-    
-    if (!playBtn || !tabs.length) return;
-
-    let currentScenario = 'clinic';
-    let isPlaying = false;
-    let currentAudio = null;
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            currentScenario = tab.dataset.scenario;
-            
-            const data = voiceScenarios[currentScenario];
-            if (data) {
-                if (titleElem) titleElem.textContent = data.title;
-                if (descElem) descElem.textContent = data.desc;
-                if (transcriptElem) transcriptElem.textContent = `"${data.transcript}"`;
-                if (badgeElem) badgeElem.textContent = data.badge;
-            }
-            stopVoice();
-        });
-    });
-
-    playBtn.addEventListener('click', () => {
-        if (isPlaying) {
-            stopVoice();
+// 1. RILEY EXAMPLE-VOICE PLAYER (recorded audio of the High Springs Pediatrics assistant; lazy-loaded on first play)
+function initRileyPlayer() {
+    const btn = document.getElementById('rileyPlay');
+    const audio = document.getElementById('rileyAudio');
+    const box = document.getElementById('rileyPlayer');
+    const timeEl = document.getElementById('rileyTime');
+    if (!btn || !audio || !box) return;
+    const fmt = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+    const setState = playing => {
+        box.classList.toggle('playing', playing);
+        btn.setAttribute('aria-pressed', String(playing));
+        btn.setAttribute('aria-label', playing ? "Pause example of Riley's voice" : "Play example of Riley's voice");
+    };
+    audio.addEventListener('loadedmetadata', () => { if (timeEl && isFinite(audio.duration)) timeEl.textContent = fmt(audio.duration); });
+    audio.addEventListener('timeupdate', () => { if (timeEl) timeEl.textContent = fmt(audio.currentTime); });
+    audio.addEventListener('ended', () => { setState(false); audio.currentTime = 0; if (isFinite(audio.duration) && timeEl) timeEl.textContent = fmt(audio.duration); });
+    audio.addEventListener('error', () => setState(false));
+    btn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play().then(() => setState(true)).catch(() => setState(false));
         } else {
-            playVoice();
+            audio.pause(); setState(false);
         }
     });
-
-    function playVoice() {
-        stopVoice();
-        isPlaying = true;
-        playerBox.classList.add('playing');
-        playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-        
-        const data = voiceScenarios[currentScenario];
-        if (data && data.audioSrc) {
-            currentAudio = new Audio(data.audioSrc);
-            currentAudio.play().then(() => {
-                currentAudio.onended = () => stopVoice();
-                currentAudio.onerror = () => fallbackSpeech(data.transcript);
-            }).catch(() => {
-                fallbackSpeech(data.transcript);
-            });
-        } else {
-            fallbackSpeech(data.transcript);
-        }
-    }
-
-    function fallbackSpeech(text) {
-        if (window.speechSynthesis) {
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.onend = () => stopVoice();
-            u.onerror = () => stopVoice();
-            window.speechSynthesis.speak(u);
-        } else {
-            setTimeout(stopVoice, 4000);
-        }
-    }
-
-    function stopVoice() {
-        isPlaying = false;
-        if (currentAudio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-            currentAudio = null;
-        }
-        if (window.speechSynthesis) {
-            window.speechSynthesis.cancel();
-        }
-        if (playerBox) playerBox.classList.remove('playing');
-        if (playBtn) playBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
-    }
-}
-
-// 2. LIVE CALL SIMULATOR MODULE
-const callScripts = {
-    dental: [
-        { sender: 'caller', text: "Hi, I have a cracked tooth and severe pain. Do you have any emergency openings today?" },
-        { sender: 'ai', text: "I'm so sorry you're in pain! We have an emergency reservation open at 2:30 PM today with Dr. Miller. Shall I lock that in for you?" },
-        { sender: 'caller', text: "Yes please, my name is Alex Reed and my number is (555) 234-5678." },
-        { sender: 'ai', text: "All set, Alex! You are booked for 2:30 PM today. A confirmation SMS with directions was just sent to your phone." }
-    ],
-    hvac: [
-        { sender: 'caller', text: "Hello, our air conditioning stopped working and our house is 86 degrees. Can someone come out?" },
-        { sender: 'ai', text: "We can help right away. We have an on-call HVAC specialist in your area with arrival between 4:00 PM and 5:00 PM today. Would that work?" },
-        { sender: 'caller', text: "That would be a lifesaver. Yes, address is 482 Maple Lane." },
-        { sender: 'ai', text: "Got it! Tech Carlos is dispatched to 482 Maple Lane for 4:00 PM. You'll receive live GPS tracking via text." }
-    ],
-    legal: [
-        { sender: 'caller', text: "Hi, I need to speak to an attorney about a commercial lease dispute." },
-        { sender: 'ai', text: "I can assist with that. Our senior partner conducts 15-minute preliminary strategy reviews every Tuesday and Thursday. Would Thursday at 10 AM suit you?" },
-        { sender: 'caller', text: "Thursday at 10 AM works great." },
-        { sender: 'ai', text: "Perfect. I've reserved Thursday at 10:00 AM on the partner's calendar and emailed you the client portal link." }
-    ]
-};
-
-function initCallSimulator() {
-    const triggerBtn = document.getElementById('triggerSimCall');
-    const scrollContainer = document.getElementById('phoneChatScroll');
-    const timerElem = document.getElementById('simCallTimer');
-    const scenarioBtns = document.querySelectorAll('.scenario-btn');
-    const successBadge = document.getElementById('simSuccessBadge');
-    
-    if (!triggerBtn || !scrollContainer) return;
-
-    let selectedScenario = 'dental';
-    let timerInterval = null;
-    let currentStep = 0;
-
-    scenarioBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            scenarioBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            selectedScenario = btn.dataset.scenario;
-            resetCall();
-        });
-    });
-
-    triggerBtn.addEventListener('click', () => {
-        startSimulation();
-    });
-
-    function resetCall() {
-        clearInterval(timerInterval);
-        if (timerElem) timerElem.textContent = "00:00";
-        if (successBadge) successBadge.style.display = "none";
-        scrollContainer.innerHTML = '<div class="sim-msg ai">Incoming call ready. Click "Simulate Live Call" to test real-time voice handling.</div>';
-    }
-
-    function startSimulation() {
-        resetCall();
-        let seconds = 0;
-        timerInterval = setInterval(() => {
-            seconds++;
-            const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
-            const secs = String(seconds % 60).padStart(2, '0');
-            if (timerElem) timerElem.textContent = `${mins}:${secs}`;
-        }, 1000);
-
-        scrollContainer.innerHTML = '';
-        const script = callScripts[selectedScenario];
-        let delay = 300;
-
-        script.forEach((msg, idx) => {
-            setTimeout(() => {
-                const msgElem = document.createElement('div');
-                msgElem.className = `sim-msg ${msg.sender}`;
-                msgElem.textContent = msg.text;
-                scrollContainer.appendChild(msgElem);
-                scrollContainer.scrollTop = scrollContainer.scrollHeight;
-
-                if (idx === script.length - 1) {
-                    if (successBadge) successBadge.style.display = "inline-flex";
-                    setTimeout(() => clearInterval(timerInterval), 3000);
-                }
-            }, delay);
-            delay += (idx % 2 === 0 ? 1800 : 2200);
-        });
-    }
 }
 
 // 3. DYNAMIC ROI CALCULATOR MODULE
+// Assumptions (shown to visitors in the page): book rate is user-set (default 32%, the site's original
+// benchmark); AI captures ROI_CAPTURE_SHARE of those calls; savings = in-house front desk (~$3,500/mo) minus Starter ($199).
+const ROI_CAPTURE_SHARE = 0.8;
+const ROI_FRONT_DESK_COST = 3500;
+const ROI_STARTER_PRICE = 199;
+
+function roiCompute(calls, dealVal, ratePct) {
+    const lost = Math.round(calls * (ratePct / 100)) * dealVal;
+    const captured = Math.round(lost * ROI_CAPTURE_SHARE);
+    const savings = ROI_FRONT_DESK_COST - ROI_STARTER_PRICE;
+    return { lost, captured, savings };
+}
+
 function initRoiCalculator() {
     const callsSlider = document.getElementById('roiCallsSlider');
     const valueSlider = document.getElementById('roiValueSlider');
-    const callsValText = document.getElementById('roiCallsVal');
-    const dealValText = document.getElementById('roiDealVal');
-    const revenueOutput = document.getElementById('roiRevenueOutput');
-    const hoursOutput = document.getElementById('roiHoursOutput');
-    const savingsOutput = document.getElementById('roiSavingsOutput');
-    const roiMultiplier = document.getElementById('roiMultiplier');
+    const rateSlider = document.getElementById('roiRateSlider');
+    if (!callsSlider || !valueSlider || !rateSlider) return;
+    const outs = { lost: document.getElementById('roiLost'), captured: document.getElementById('roiCaptured'), savings: document.getElementById('roiSavings') };
+    const shareEl = document.getElementById('roiCaptureShare');
+    if (shareEl) shareEl.textContent = Math.round(ROI_CAPTURE_SHARE * 100) + '%';
+    const money = n => '$' + Math.round(n).toLocaleString('en-US');
+    const shown = { lost: 0, captured: 0, savings: 0 };
+    const rafs = {};
 
-    if (!callsSlider || !valueSlider) return;
+    function tween(key, to) {
+        const el = outs[key];
+        if (!el) return;
+        cancelAnimationFrame(rafs[key]);
+        if (prefersReducedMotion) { shown[key] = to; el.textContent = money(to); return; }
+        const from = shown[key], t0 = performance.now(), dur = 450;
+        const step = now => {
+            const p = Math.min(1, (now - t0) / dur);
+            const e = 1 - Math.pow(1 - p, 3);
+            shown[key] = from + (to - from) * e;
+            el.textContent = money(shown[key]);
+            if (p < 1) rafs[key] = requestAnimationFrame(step); else { shown[key] = to; el.textContent = money(to); }
+        };
+        rafs[key] = requestAnimationFrame(step);
+    }
 
     function calculate() {
         const calls = parseInt(callsSlider.value, 10);
         const dealVal = parseInt(valueSlider.value, 10);
-
-        callsValText.textContent = `${calls} calls`;
-        dealValText.textContent = `$${dealVal.toLocaleString()}`;
-
-        // Conversion benchmark: 32% of answered calls convert into customers
-        const converted = Math.round(calls * 0.32);
-        const monthlyRevenue = converted * dealVal;
-        const hoursSaved = Math.round((calls * 8) / 60);
-        const receptionistSavings = 3500; // Average monthly full-time front desk salary
-        const totalImpact = monthlyRevenue + receptionistSavings;
-        const multiplier = Math.max(2, Math.round((monthlyRevenue / 199)));
-
-        if (revenueOutput) revenueOutput.textContent = `$${monthlyRevenue.toLocaleString()}`;
-        if (hoursOutput) hoursOutput.textContent = `${hoursSaved} hrs/mo`;
-        if (savingsOutput) savingsOutput.textContent = `$${totalImpact.toLocaleString()}`;
-        if (roiMultiplier) roiMultiplier.textContent = `${multiplier}x ROI`;
+        const rate = parseInt(rateSlider.value, 10);
+        document.getElementById('roiCallsVal').textContent = `${calls} calls`;
+        document.getElementById('roiDealVal').textContent = `$${dealVal.toLocaleString('en-US')}`;
+        document.getElementById('roiRateVal').textContent = `${rate}%`;
+        [callsSlider, valueSlider, rateSlider].forEach(sl => {
+            sl.style.setProperty('--fill', ((sl.value - sl.min) / (sl.max - sl.min) * 100) + '%');
+        });
+        const r = roiCompute(calls, dealVal, rate);
+        tween('lost', r.lost); tween('captured', r.captured); tween('savings', r.savings);
     }
 
-    callsSlider.addEventListener('input', calculate);
-    valueSlider.addEventListener('input', calculate);
+    [callsSlider, valueSlider, rateSlider].forEach(sl => sl.addEventListener('input', calculate));
     calculate();
 }
 
 // 4. PRICING TOGGLE MODULE
 function initPricingToggle() {
     const toggle = document.getElementById('billingToggle');
-    const starterPrice = document.getElementById('priceStarter');
-    const growthPrice = document.getElementById('priceGrowth');
-    const entPrice = document.getElementById('priceEnt');
+    const prices = { monthly: { priceStarter: 199, priceGrowth: 450, priceEnt: 899 }, annual: { priceStarter: 159, priceGrowth: 450, priceEnt: 719 } };
     const monthlyLabel = document.getElementById('labelMonthly');
     const annualLabel = document.getElementById('labelAnnual');
-
     if (!toggle) return;
 
     let isAnnual = false;
     toggle.addEventListener('click', () => {
         isAnnual = !isAnnual;
         toggle.classList.toggle('active', isAnnual);
+        toggle.setAttribute('aria-checked', String(isAnnual));
         if (monthlyLabel) monthlyLabel.classList.toggle('active', !isAnnual);
         if (annualLabel) annualLabel.classList.toggle('active', isAnnual);
-
-        if (isAnnual) {
-            if (starterPrice) starterPrice.textContent = '159';
-            if (growthPrice) growthPrice.textContent = '450';
-            if (entPrice) entPrice.textContent = '719';
-        } else {
-            if (starterPrice) starterPrice.textContent = '199';
-            if (growthPrice) growthPrice.textContent = '450';
-            if (entPrice) entPrice.textContent = '899';
-        }
+        const set = prices[isAnnual ? 'annual' : 'monthly'];
+        Object.keys(set).forEach(id => { const el = document.getElementById(id); if (el) el.textContent = set[id]; });
+        document.querySelectorAll('.pricing-period').forEach(p => { p.textContent = isAnnual ? '/ mo, billed annually' : '/ month'; });
     });
 }
 
@@ -601,15 +223,19 @@ function initFaqAccordion() {
     const faqCards = document.querySelectorAll('.faq-card');
     faqCards.forEach(card => {
         const btn = card.querySelector('.faq-question-btn');
-        if (btn) {
-            btn.addEventListener('click', () => {
-                const isOpen = card.classList.contains('open');
-                faqCards.forEach(c => c.classList.remove('open'));
-                if (!isOpen) {
-                    card.classList.add('open');
-                }
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+            const isOpen = card.classList.contains('open');
+            faqCards.forEach(c => {
+                c.classList.remove('open');
+                const b = c.querySelector('.faq-question-btn');
+                if (b) b.setAttribute('aria-expanded', 'false');
             });
-        }
+            if (!isOpen) {
+                card.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
     });
 }
 
@@ -627,7 +253,7 @@ function initContactForm() {
 
         const originalBtnHtml = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>Transmitting Demo Request... ⏳</span>';
+        submitBtn.innerHTML = '<span>Sending...</span>';
 
         const formData = new FormData(form);
 
@@ -651,10 +277,10 @@ function initContactForm() {
                     statusDiv.style.borderRadius = '10px';
                     statusDiv.style.marginTop = '16px';
                     statusDiv.style.textAlign = 'center';
-                    statusDiv.innerHTML = '<strong>⚡ Message Sent!</strong><br>Confirmation has popped up on your screen. Check your inbox or call us at <strong>(904) 686-6593</strong>.';
+                    statusDiv.innerHTML = '<strong>Message sent.</strong><br>We\'ll be in touch shortly, or call us at <a href="tel:+19046866593" style="color:inherit;text-decoration:underline">(904) 686-6593</a>.';
                 }
                 form.reset();
-                submitBtn.innerHTML = '<span>Message Sent Successfully ✅</span>';
+                submitBtn.innerHTML = '<span>Request sent. Thank you!</span>';
                 submitBtn.disabled = false;
                 showFormSuccessModal();
             } else {
@@ -667,39 +293,6 @@ function initContactForm() {
         }
     });
 }
-
-// 7. SCROLL REVEAL ANIMATIONS MODULE
-function initScrollRevealObserver() {
-    const selectors = [
-        '.bento-card',
-        '.step',
-        '.pricing-card',
-        '.industry-card',
-        '.faq-card',
-        '.roi-box',
-        '.showcase-frame',
-        '.cta-wrapper'
-    ];
-
-    const elements = document.querySelectorAll(selectors.join(', '));
-    elements.forEach(el => el.classList.add('scroll-reveal-box'));
-
-    if ('IntersectionObserver' in window) {
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-revealed');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-        elements.forEach(el => obs.observe(el));
-    } else {
-        elements.forEach(el => el.classList.add('is-revealed'));
-    }
-}
-
 
 // ===== CONFIRMATION POPUP MODAL LOGIC =====
 function showFormSuccessModal() {
@@ -750,4 +343,56 @@ function initModalHandlers() {
         const currentBase = window.location.protocol + "//" + window.location.host + window.location.pathname;
         nextInput.value = currentBase + (currentBase.endsWith('/') ? '' : '/') + '?submitted=true';
     }
+}
+
+
+// ===== SCROLL REVEAL (opacity + translateY, staggered via --i; CSS handles motion) =====
+function initReveal() {
+    const els = document.querySelectorAll('.reveal');
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+        els.forEach(el => el.classList.add('in'));
+        document.querySelectorAll('.flow-line').forEach(f => f.classList.add('in-line'));
+        return;
+    }
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('in'); if (e.target.parentElement.classList.contains('flow-line')) e.target.parentElement.classList.add('in-line'); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(el => obs.observe(el));
+}
+
+// ===== MOBILE STICKY CTA (shows after hero, hides at the contact section, dismissible) =====
+function initStickyCta() {
+    const bar = document.getElementById('stickyCta');
+    const hero = document.getElementById('hero');
+    const contact = document.getElementById('contact');
+    const closeBtn = document.getElementById('stickyClose');
+    if (!bar || !hero || !('IntersectionObserver' in window)) return;
+    let dismissed = false, pastHero = false, atContact = false;
+    try { dismissed = sessionStorage.getItem('stickyDismissed') === '1'; } catch (e) {}
+    const update = () => {
+        const show = pastHero && !atContact && !dismissed;
+        bar.hidden = !show;
+        document.body.classList.toggle('has-sticky', show);
+    };
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.top < 0; update(); }, { threshold: 0 }).observe(hero);
+    if (contact) new IntersectionObserver(([e]) => { atContact = e.isIntersecting; update(); }, { threshold: 0.05 }).observe(contact);
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+        dismissed = true;
+        try { sessionStorage.setItem('stickyDismissed', '1'); } catch (e) {}
+        update();
+    });
+}
+
+// ===== CTA CLICK TRACKING HOOK =====
+// No analytics provider is installed on this site. This pushes to dataLayer / gtag if one is added later.
+function initCtaTracking() {
+    document.addEventListener('click', e => {
+        const el = e.target.closest('[data-cta]');
+        if (!el) return;
+        const name = el.getAttribute('data-cta');
+        if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event: 'cta_click', cta: name });
+        if (typeof window.gtag === 'function') window.gtag('event', 'cta_click', { cta: name });
+    });
 }
