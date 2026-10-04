@@ -1,0 +1,96 @@
+/* Content-led compositions and a changing, layered dark palette. */
+.sec { isolation: isolate; }
+#problem { background: radial-gradient(ellipse at 0 20%, #17302b 0, transparent 58%), linear-gradient(145deg,#101a19,#101216 70%) !important; }
+#solution { background: radial-gradient(ellipse at 85% 30%,#123f37 0,transparent 65%),linear-gradient(125deg,#0f1718,#102621) !important; }
+#live-demo { background: radial-gradient(ellipse at 50% 45%,#203962 0,transparent 65%),linear-gradient(160deg,#101a28,#10151e) !important; }
+#how-it-works { background: radial-gradient(ellipse at 0 75%,#21353b,transparent 60%),linear-gradient(120deg,#101c22,#12171c) !important; }
+#features { background: radial-gradient(ellipse at 90% 10%,#164b3e,transparent 55%),radial-gradient(ellipse at 0 80%,#172f3e,transparent 60%),#0e191b !important; }
+#industries { background: radial-gradient(ellipse at 90% 40%,#423526,transparent 65%),linear-gradient(140deg,#1c2425,#231f1b) !important; }
+#roi-calculator { background: radial-gradient(ellipse at 15% 60%,#133c35,transparent 70%),#111c1c !important; }
+#integrations { background: radial-gradient(ellipse at 80% 0,#22384f,transparent 65%),#121b25 !important; }
+#pricing { background: radial-gradient(ellipse at 50% 60%,#174137,transparent 65%),linear-gradient(160deg,#12201e,#11191d) !important; }
+#trust { background: linear-gradient(115deg,#172b2b,#172431 70%,#222732) !important; }
+#faq { background: radial-gradient(ellipse at 100% 80%,#29303e,transparent 70%),#161a21 !important; }
+#contact { background: radial-gradient(ellipse at 15% 10%,#204e41,transparent 65%),#12211f !important; }
+
+/* Open service sequence: the numbers describe the call's journey. */
+#solution .section-header { max-width:760px; margin:0 0 60px; }
+#solution .section-title,#solution .section-subtitle,
+#industries .section-title,#industries .section-subtitle,
+#integrations .section-title,#integrations .section-subtitle { text-align:left !important; margin-left:0 !important; }
+#solution .card-grid { gap:44px; }
+#solution .card-grid>.fcard,#industries .card-grid>.fcard,
+#integrations .card-grid>.fcard,#trust .card-grid>.fcard,
+#features .card-grid>.fcard:nth-child(n+3) {
+ background:none !important; box-shadow:none !important; border-radius:0; border:0; transform:none !important;
+}
+#solution .fcard { padding:28px 0 0; border-top:1px solid #ffffff30 !important; }
+#solution .flow-line::before,#solution .fcard::before,#solution .fcard::after { display:none; }
+.flow-number { display:block; font-size:14px; letter-spacing:.14em; color:#80cbbb; margin-bottom:32px; }
+#solution h3 { font-size:25px; font-weight:600; }
+
+/* Feature leads carry their own visual; supporting details stay open. */
+#features .card-grid { grid-template-columns:repeat(6,minmax(0,1fr)); gap:0 38px; }
+#features .card-grid>.fcard { grid-column:span 2; }
+#features .card-grid>.fcard:nth-child(-n+2) { grid-column:span 3; min-height:380px; padding:32px; border-radius:20px; margin-bottom:44px; border:1px solid #ffffff20; }
+#features .card-grid>.fcard:first-child { background:linear-gradient(135deg,#235b4b,#132d2c) !important; }
+#features .card-grid>.fcard:nth-child(2) { background:linear-gradient(135deg,#243f55,#172c38) !important; }
+#features .card-grid>.fcard:nth-child(n+3) { padding:28px 0; border-top:1px solid #ffffff25; }
+#features .fcard::before,#features .fcard::after { display:none; }
+#features .fstat { color:#9dcdc0; }
+.availability-art,.booking-art { height:190px; margin-bottom:26px; }
+.availability-art strong { font-family:Outfit,Inter,sans-serif; font-size:110px; line-height:1.1; font-weight:500; letter-spacing:-.075em; color:#d2f4e8; }
+.availability-art strong>span { color:#6cb39f; font-weight:300; }
+.availability-art>div { display:flex; gap:8px; margin-top:12px; }
+.availability-art>div>span { font-size:11px; padding:7px 11px; border:1px solid #ffffff25; border-radius:30px; color:#d7eee5; }
+.art-caption { font-size:10px; letter-spacing:.12em; color:#aecbdc; }
+.booking-path { display:flex; gap:0; margin:32px 0 24px; }
+.booking-path>span { flex:1; font-size:12px; padding:12px 4px; border-top:1px solid #7facc0; color:#dae8ef; }
+.calendar-bars { display:flex; gap:10px; height:60px; align-items:flex-end; }
+.calendar-bars i { flex:1; height:40px; background:linear-gradient(#789eaf30,#789eaf0a); border-top:2px solid #83b3c5; border-radius:4px 4px 0 0; }
+.calendar-bars i:nth-child(2n) { height:58px; border-color:#9cd3bc; background:linear-gradient(#9cd3bc35,#9cd3bc08); }
+
+/* Setup is a single connected timeline, not another set of boxes. */
+#how-it-works .steps-container { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:36px; }
+#how-it-works .step { display:block; padding:28px 0 0; min-height:0; background:none !important; box-shadow:none !important; border:0; border-top:1px solid #ffffff30; border-radius:0; transform:none !important; }
+#how-it-works .step::before,#how-it-works .step::after,#how-it-works .step-number,#how-it-works .step-connector { display:none; }
+#how-it-works .step-badge { position:static; margin:0 0 30px; padding:0; background:none; border:0; box-shadow:none; color:#a2c4d5; }
+#how-it-works .step-content { padding:0; }
+#how-it-works .step h3 { font-size:25px; }
+
+/* Industries read like a tailored service directory. */
+#industries .container { display:grid; grid-template-columns:.85fr 1.15fr; gap:0 70px; align-items:start; }
+#industries .card-grid { display:block; }
+#industries .card-grid>.fcard { display:block; padding:27px 0; border-top:1px solid #ffffff26; }
+#industries .fcard h3 { font-size:23px; color:#f3e9db; margin-bottom:9px; }
+#industries .also { grid-column:2; text-align:left; margin-top:25px; padding:0; border:0; background:none; }
+#industries .fcard::before,#industries .fcard::after { display:none; }
+
+/* Integrations use compact rules; trust becomes a quiet reassurance strip. */
+#integrations .container { display:grid; grid-template-columns:.8fr 1.2fr; gap:60px; }
+#integrations .card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 30px; }
+#integrations .card-grid>.fcard { padding:24px 0; border-top:1px solid #ffffff25; }
+#integrations h3 { font-size:19px; }
+#integrations .fcard::before,#integrations .fcard::after,#trust .fcard::before,#trust .fcard::after { display:none; }
+#trust .card-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px 44px; }
+#trust .card-grid>.fcard { padding:0 0 0 18px; border-left:2px solid #74ae9c; }
+#trust .fcard p { font-size:14px; }
+
+@media(max-width:800px) {
+ #industries .container,#integrations .container { display:block; }
+ #industries .section-header,#integrations .section-header { margin-bottom:32px; }
+ #industries .also { margin-top:28px; }
+ #features .card-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 24px; }
+ #features .card-grid>.fcard,#features .card-grid>.fcard:nth-child(-n+2) { grid-column:span 1; }
+ #solution .card-grid,#how-it-works .steps-container { gap:24px; }
+}
+@media(max-width:600px) {
+ #features .card-grid,#solution .card-grid,#how-it-works .steps-container { grid-template-columns:1fr; }
+ #features .card-grid>.fcard:nth-child(-n+2) { min-height:0; padding:25px; margin-bottom:24px; }
+ #features .card-grid>.fcard:nth-child(n+3) { padding:24px 0; }
+ #solution .flow-number,#how-it-works .step-badge { margin-bottom:16px; }
+ #solution .section-header { margin-bottom:32px; }
+ #trust .card-grid,#integrations .card-grid { grid-template-columns:1fr; }
+ .availability-art strong { font-size:100px; }
+ .booking-path>span { font-size:11px; }
+}

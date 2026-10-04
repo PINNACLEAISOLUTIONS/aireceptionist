@@ -1,0 +1,39 @@
+/* One restrained sans-serif family, with hierarchy carried by scale and space. */
+:root {
+ --font-primary:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+ --font-display:var(--font-primary);
+ --font-mono:var(--font-primary);
+}
+body { font-family:var(--font-primary); font-weight:400; font-synthesis:none; }
+h1,h2,h3,h4,button,input,select,textarea { font-family:var(--font-primary) !important; }
+.hero-h1 {
+ font-size:clamp(2.5rem,4.8vw,4.5rem); font-weight:550; line-height:1.08;
+ letter-spacing:-.035em; text-transform:none; text-wrap:balance;
+}
+.hero-h1 .h1-line { font-weight:inherit; text-transform:none; }
+.hero-h1 .h1-accent { color:#a3dec9; background:none; -webkit-text-fill-color:currentColor; text-shadow:none; }
+.section-title,#problem .section-title,.final-cta .cta-title {
+ font-family:var(--font-primary) !important; font-weight:550 !important;
+ font-size:clamp(2rem,3.8vw,3.25rem) !important; line-height:1.15 !important;
+ letter-spacing:-.03em !important; text-transform:none; text-wrap:balance;
+}
+#industries .section-title,#integrations .section-title { font-size:clamp(2rem,3vw,2.75rem) !important; }
+.section-subtitle { font-size:clamp(1rem,1.6vw,1.125rem) !important; line-height:1.7 !important; font-weight:400 !important; letter-spacing:0; max-width:65ch; }
+.fcard h3,.step h3,.pricing-card h3,.cta-sub-h { font-weight:550 !important; letter-spacing:-.018em; line-height:1.35; }
+.fcard p,.step p,.hero-lead,.cta-desc { font-weight:400; font-size:1rem; line-height:1.7; letter-spacing:0; }
+.hero-lead { font-size:1.125rem; max-width:48ch; }
+.hero-pain { font-weight:500; letter-spacing:-.01em; }
+.btn,.btn span,.btn-nav,#contactSubmitBtn { font-family:var(--font-primary) !important; font-weight:600 !important; letter-spacing:0 !important; text-transform:none !important; }
+.nav-links a { font-weight:500; }
+.eyebrow,.section-tag,.step-badge,.demo-label { font-weight:500; letter-spacing:.06em; }
+.fstat,.riley-time,.slider-value-badge,.pricing-val,.roi-tile .num { font-variant-numeric:tabular-nums; }
+.demo-number { font-weight:550; letter-spacing:-.025em; }
+.pricing-val,.roi-tile .num { font-weight:550 !important; letter-spacing:-.035em !important; }
+.availability-art strong { font-family:var(--font-primary); font-size:96px; font-weight:500; letter-spacing:-.04em; }
+.faq-question { font-weight:500; letter-spacing:-.01em; }
+@media(max-width:600px) {
+ .hero-h1 { font-size:clamp(2.25rem,9vw,3rem); }
+ .section-title,#problem .section-title,.final-cta .cta-title { font-size:2rem !important; }
+ .hero-lead { font-size:1rem; }
+ .availability-art strong { font-size:88px; }
+}
