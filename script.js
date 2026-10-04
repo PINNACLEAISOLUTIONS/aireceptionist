@@ -289,7 +289,7 @@ function initContactForm() {
                     statusDiv.innerHTML = '<strong>Message sent.</strong><br>We\'ll be in touch shortly, or call us at <a href="tel:+19046866593" style="color:inherit;text-decoration:underline">(904) 686-6593</a>.';
                 }
                 form.reset();
-                submitBtn.innerHTML = '<span>Request sent. Thank you!</span>';
+                submitBtn.innerHTML = '<span>Message sent. Thank you!</span>';
                 submitBtn.disabled = false;
                 showFormSuccessModal();
             } else {

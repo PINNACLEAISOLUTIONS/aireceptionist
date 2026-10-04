@@ -31,6 +31,8 @@ h1,h2,h3,h4,button,input,select,textarea { font-family:var(--font-primary) !impo
 .pricing-val,.roi-tile .num { font-weight:550 !important; letter-spacing:-.035em !important; }
 .availability-art strong { font-family:var(--font-primary); font-size:96px; font-weight:500; letter-spacing:-.04em; }
 .faq-question { font-weight:500; letter-spacing:-.01em; }
+.form-textarea { min-height:140px; resize:vertical; font-size:1rem; line-height:1.6; }
+.field-optional { color:var(--text-secondary); font-weight:400; }
 @media(max-width:600px) {
  .hero-h1 { font-size:clamp(2.25rem,9vw,3rem); }
  .section-title,#problem .section-title,.final-cta .cta-title { font-size:2rem !important; }
