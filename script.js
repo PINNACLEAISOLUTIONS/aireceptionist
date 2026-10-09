@@ -1,5 +1,14 @@
 // ===== PINNACLE AI RECEPTIONIST - JAVASCRIPT =====
 
+// Fix 100vh issue in Facebook/in-app browsers (use dvh with JS fallback)
+function setViewportHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+setViewportHeight();
+window.addEventListener('resize', setViewportHeight);
+window.addEventListener('orientationchange', setViewportHeight);
+
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 document.addEventListener('DOMContentLoaded', () => {
